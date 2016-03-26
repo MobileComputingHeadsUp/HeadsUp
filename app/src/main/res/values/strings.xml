@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">HeadsUp</string>
+    <string name="action_settings">Settings</string>
+    <string name="beacon_monitoring">Monitoring</string>
+</resources>
