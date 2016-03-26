@@ -25,4 +25,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
     compile 'org.altbeacon:android-beacon-library:2+'
+    compile 'com.loopj.android:android-async-http:1.4.6'
+    compile "org.apache.httpcomponents:httpcore:4.3.2"
 }

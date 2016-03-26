@@ -27,7 +27,7 @@ public class HeadsUpStarter extends Application implements BootstrapNotifier {
         beaconManager.getBeaconParsers().add(new BeaconParser().
                 setBeaconLayout("s:0-1=feaa,m:2-2=10,p:3-3:-41,i:4-20v"));
 
-        // TODO: Perhaps add more specific filters later. For now, find all beacons.
+        // TODO: Filter which beacons can launch the application with Identifiers. For now, find all beacons.
         Region region = new Region("all-beacons-startup", null, null, null);
         regionBootstrap = new RegionBootstrap(this, region);
     }

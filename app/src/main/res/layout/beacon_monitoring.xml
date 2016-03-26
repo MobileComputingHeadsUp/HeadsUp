@@ -13,11 +13,22 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:text="Searching for Beacon Devices"/>
     <TextView
-        android:id="@+id/beaconUrl"
+    android:id="@+id/beaconUrl"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_below="@+id/description"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="20dp"
+    android:textSize="18sp"/>
+    <TextView
+        android:id="@+id/webResponse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/beaconUrl"
+        android:paddingTop="20dp"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:textSize="18sp"/>
