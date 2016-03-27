@@ -1,0 +1,4 @@
+* [31m81adc47[m -[33m (HEAD, MoniteringService)[m Ranging and Montering is working well. As well as BroadcastReceivers for custom beacon-event related intents [32m(4 seconds ago) [1;34m<bmtreuherz>[m
+* [31mf81cd2e[m -[33m[m Service not quite working [32m(6 hours ago) [1;34m<bmtreuherz>[m
+* [31m99656bf[m -[33m (origin/master, master)[m Implemented automatic launching on beacon detection. Also, when detecting a beacon emitting a URL frame, the BeaconMonitoringActivity will make a get request to that URL and display the data as text. [32m(17 hours ago) [1;34m<bmtreuherz>[m
+* [31m44c2137[m -[33m[m first commit [32m(19 hours ago) [1;34m<bmtreuherz>[m
