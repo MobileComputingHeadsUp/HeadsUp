@@ -4,7 +4,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".HeadsUpStarter"
+        android:name=".HeadsUp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,17 +12,16 @@
         android:theme="@style/AppTheme">
         <activity
             android:launchMode="singleInstance"
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".BeaconMonitoringActivity"
+            android:name=".activities.BeaconRangingActivity"
             android:label="@string/beacon_monitoring">
         </activity>
     </application>
