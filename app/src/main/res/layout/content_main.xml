@@ -10,18 +10,34 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activities.MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:showIn="@layout/activity_main"
+    android:background="@color/blue">
 
     <TextView
-        android:id="@+id/message"
+        android:id="@+id/main_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Search for beacons!" />\
-    <Button
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-light"
+        android:textSize="38sp"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:text="You are not currently in a Smart Space"
+        android:gravity="center"/>
+    <TextView
+        android:id="@+id/main_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/findBeacons"
-        android:text="Find Beacons"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="@+id/message"/>
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/main_title"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-light"
+        android:textSize="30sp"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:text="Don't worry! We're looking for spaces now."
+        android:gravity="center"/>
+
 </RelativeLayout>

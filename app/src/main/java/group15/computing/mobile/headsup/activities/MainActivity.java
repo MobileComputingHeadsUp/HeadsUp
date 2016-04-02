@@ -40,8 +40,6 @@ import group15.computing.mobile.headsup.utilities.SmartTask;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity"; // Used for debugging purposes.
-    private final int SIGN_IN = 2;
-    private Button findButton;
     private IntentFilter urlFilter;
     private BroadcastReceiver urlReceiver;
     private Timer rangingTimer;
@@ -64,15 +62,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 super.run();
-                makeToast("Searching for beacons");
                 startRanging();
+                Log.d(TAG, "Searching for beacons.");
             }
         };
         offTask = new SmartTask() {
             @Override
             public void run() {
                 super.run();
-                makeToast("Stopped for beacons");
+                Log.d(TAG, "Stopped searching for beacons");
                 stopRanging();
             }
         };
@@ -108,18 +106,6 @@ public class MainActivity extends AppCompatActivity {
         rangingTimer.cancel();
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if(requestCode == SIGN_IN){
-//            if(resultCode == Activity.RESULT_CANCELED){
-//                // The sign in failed.
-//                makeToast("You must sign in to continue.");
-//                // TODO: Add a button so they can.
-//            }
-//        }
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -151,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
             public void onReceive(Context context, Intent intent) {
                 Log.d(TAG, "RECEIVED URL");
                 String url = intent.getStringExtra(BeaconEvent.DATA);
+                makeToast("Beacon Found!");
 //                makeToast("Url " + url + " found.");
                 makeRequestToUrl(url);
             }
