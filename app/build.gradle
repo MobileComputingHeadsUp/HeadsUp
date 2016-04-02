@@ -22,9 +22,12 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.android.support:design:23.1.1'
-    compile 'org.altbeacon:android-beacon-library:2+'
+    apply plugin: 'com.google.gms.google-services'
+    compile 'com.android.support:appcompat-v7:23.2.1'
+    compile 'com.android.support:design:23.2.1'
+    compile 'org.altbeacon:android-beacon-library:2.+'
     compile 'com.loopj.android:android-async-http:1.4.6'
-    compile "org.apache.httpcomponents:httpcore:4.3.2"
+    compile 'org.apache.httpcomponents:httpcore:4.3.2'
+    compile 'com.google.android.gms:play-services-auth:8.3.0'
+    compile 'com.android.support:support-v4:23.2.1'
 }

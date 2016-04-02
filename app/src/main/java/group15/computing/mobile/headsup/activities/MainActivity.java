@@ -2,6 +2,7 @@ package group15.computing.mobile.headsup.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -10,8 +11,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import group15.computing.mobile.headsup.Auth.Authentication;
 import group15.computing.mobile.headsup.R;
-import group15.computing.mobile.headsup.utilities.Constants;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,8 +34,22 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "Going to ranging activity");
                 Intent i = new Intent(MainActivity.this, BeaconRangingActivity.class);
                 startActivity(i);
+//                startActivityForResult(i, 0);
             }
         });
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        if(!Authentication.getInstance().isSignedIn()){
+            Log.d(TAG, "IS NOT LOGGED IN");
+            Intent i = new Intent(MainActivity.this, SignInActivity.class);
+            startActivity(i);
+        }else{
+            Log.d(TAG, "IS LOGGED IN");
+        }
     }
 
     @Override

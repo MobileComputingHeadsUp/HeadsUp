@@ -22,7 +22,7 @@ import org.json.JSONObject;
 import group15.computing.mobile.headsup.beacon_detection.BeaconEvent;
 import group15.computing.mobile.headsup.utilities.Constants;
 import group15.computing.mobile.headsup.R;
-import group15.computing.mobile.headsup.utilities.WebClient;
+import group15.computing.mobile.headsup.utilities.APIClient;
 
 /**
  * Created by Bradley on 3/25/2016.
@@ -31,7 +31,6 @@ public class BeaconRangingActivity extends Activity {
 
     private static final String TAG = "BeaconMonitoring"; // Used for debugging purposes.
     private TextView webResponseTV;
-    private WebClient webClient;
 
     // We want to pick up whenever we receive a URL.
     private BroadcastReceiver urlReceiver;
@@ -41,9 +40,6 @@ public class BeaconRangingActivity extends Activity {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.beacon_monitoring);
-
-        // This WebClient will be used to make requests to the server after we receive a URL.
-        webClient = new WebClient();
 
         // TODO: Remove after debugging. For now display the json data so we know we got it Eeeiw.
         webResponseTV = (TextView) findViewById(R.id.webResponseTV);
@@ -92,7 +88,7 @@ public class BeaconRangingActivity extends Activity {
 
         // TODO: Perhaps parse the url to know what to do with it. For testing purposes, I am
         // TODO: just making making a get request on that url.
-        webClient.get(url, new JsonHttpResponseHandler() {
+        APIClient.get(url, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {

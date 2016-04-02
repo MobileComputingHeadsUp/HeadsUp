@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="group15.computing.mobile.headsup">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -21,7 +22,12 @@
         </activity>
         <activity
             android:name=".activities.BeaconRangingActivity"
-            android:label="@string/beacon_monitoring">
+            android:label="@string/beacon_monitoring"></activity>
+        <activity
+            android:name=".activities.SignInActivity"
+            android:label="@string/sign_in"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
+
 </manifest>

@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_id": "headsup-e7ab3",
+    "project_number": "1093664181012",
+    "name": "HeadsUp"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1093664181012:android:721b42b7452d0e5a",
+        "client_id": "android:group15.computing.mobile.headsup",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "group15.computing.mobile.headsup",
+          "certificate_hash": []
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1093664181012-ct6jnr5gh2ij5sa6gr6ljn5nlo3u5j8j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "group15.computing.mobile.headsup",
+            "certificate_hash": "811F273F72518B56C3E156007C2C4E91DB6C30D9"
+          }
+        },
+        {
+          "client_id": "1093664181012-u0cdesqbprhp7p6toinn4s2mkte9fpj6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}
