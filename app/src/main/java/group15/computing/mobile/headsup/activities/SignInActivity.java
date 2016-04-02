@@ -1,8 +1,10 @@
 package group15.computing.mobile.headsup.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -109,45 +111,61 @@ public class SignInActivity extends FragmentActivity implements GoogleApiClient.
     }
 
     private void handleSignInResult(final GoogleSignInResult result){
-        Log.d(TAG, "handleSignInResult: " + result.isSuccess());
-
         if(result.isSuccess()){
-            Toast.makeText(this, result.getSignInAccount().getDisplayName(), Toast.LENGTH_LONG).show();
 
             // Signed in successfully, show authenticated UI.
-            GoogleSignInAccount acct = result.getSignInAccount();
-
-            final User currentUser = new User(acct);
+            final GoogleSignInAccount acct = result.getSignInAccount();
 
             // Authenticate with the server.
             String idToken = acct.getIdToken();
             APIClient.signInUser(idToken, new JsonHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                    try {
-                        Log.d(TAG, "SUCCESS!!!!!!!!!!!!!!!!!!!!" + response.toString());
-                        // Get the data from the response
-                        JSONObject data = response.getJSONObject("data");
-
-                        // TODO: Add profile information to the user before adding it.
-                        Authentication.getInstance().userSignedIn(currentUser);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    if (statusCode == 500 || statusCode == 403) {
+                        returnFailure();
                     }
+
+                    // Construct the user object with the JSON response and google account.
+                    User user = new User(response, acct);
+                    Authentication.getInstance().userSignedIn(user);
+
+                    Log.d(TAG, "Logged In");
+                    makeToast("Welcome " + acct.getDisplayName());
+                    returnSuccess();
                 }
 
                 @Override
-                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                    super.onFailure(statusCode, headers, throwable, errorResponse);
-
-                    Log.d(TAG, "FAILED!!!!!!" + errorResponse.toString());
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    super.onFailure(statusCode, headers, responseString, throwable);
+                    returnFailure();
                 }
-
             });
-
-            // TODO: This should be in the callback
-            Authentication.getInstance().userSignedIn(currentUser);
-            this.finish();
+        }else{
+            returnFailure();
         }
+    }
+
+    private void returnSuccess(){
+        Intent returnIntent = new Intent();
+        setResult(Activity.RESULT_OK, returnIntent);
+        finish();
+    }
+
+    private void returnFailure(){
+        Log.d(TAG, "Error could not log in");
+        makeToast("Error could not log in");
+
+        Intent returnIntent = new Intent();
+        setResult(Activity.RESULT_CANCELED, returnIntent);
+        finish();
+    }
+
+    private void makeToast(final String text){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(SignInActivity.this, text, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
