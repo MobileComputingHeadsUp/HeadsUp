@@ -17,7 +17,28 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    signingConfigs {
+        debug {
+            storeFile file("debug.keystore")
+        }
+
+
+//        myConfig {
+//            storeFile file("other.keystore")
+//            storePassword "android"
+//            keyAlias "androiddebugkey"
+//            keyPassword "android"
+//        }
+    }
+
+
+//    buildTypes {
+//        foo {
+//            signingConfig signingConfigs.myConfig
+//        }
+//    }
 }
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
