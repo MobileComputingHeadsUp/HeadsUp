@@ -21,5 +21,9 @@ public class User{
         // TODO: Construct the user (profile and such) once its been setup on the server.
     }
 
+    public String getId(){
+        return googleAccount.getId();
+    }
+
     // TODO: Add whatever accessors are necessary.
 }

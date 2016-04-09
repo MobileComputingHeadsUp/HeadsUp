@@ -40,12 +40,8 @@ import group15.computing.mobile.headsup.utilities.SmartTask;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity"; // Used for debugging purposes.
-    private IntentFilter urlFilter;
-    private BroadcastReceiver urlReceiver;
-    private Timer rangingTimer;
-    private SmartTask onTask;
-    private SmartTask offTask;
-    private final int searchPeriod = 30000; // Search for 15 seconds on, 15 off.
+    private IntentFilter uidFilter;
+    private BroadcastReceiver uidReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,24 +53,6 @@ public class MainActivity extends AppCompatActivity {
         // Create the timer and url broadcast receiever.
         createUrlListener();
 
-        // Create the timer tasks
-        onTask = new SmartTask() {
-            @Override
-            public void run() {
-                super.run();
-                startRanging();
-                Log.d(TAG, "Searching for beacons.");
-            }
-        };
-        offTask = new SmartTask() {
-            @Override
-            public void run() {
-                super.run();
-                Log.d(TAG, "Stopped searching for beacons");
-                stopRanging();
-            }
-        };
-
         if(!Authentication.getInstance().isSignedIn()){
             Log.d(TAG, "IS NOT LOGGED IN");
             Intent i = new Intent(MainActivity.this, SignInActivity.class);
@@ -85,25 +63,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
-        rangingTimer = new Timer("rangingTimer", true);
 
         if(Authentication.getInstance().isSignedIn()){
-            searchForBeacons();
+            startRanging();
         }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        stopSearching();
-        rangingTimer.cancel();
+        stopRanging();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        stopSearching();
-        rangingTimer.cancel();
+        stopRanging();
     }
 
 
@@ -131,8 +106,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void createUrlListener(){
         // Register the Url broadcast listener
-        urlFilter = new IntentFilter(Constants.URL_FOUND);
-        urlReceiver = new BroadcastReceiver() {
+        uidFilter = new IntentFilter(Constants.UID_FOUND);
+        uidReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 Log.d(TAG, "RECEIVED URL");
@@ -144,24 +119,6 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
-    private void searchForBeacons(){
-
-        // Scheduele a task that starts ranging immediately.
-        if(!onTask.isRunning()){
-            rangingTimer.scheduleAtFixedRate(onTask, 0, searchPeriod);
-        }
-
-        // Schedule a task that starts halfway through the period.
-        if(!onTask.isRunning()){
-            rangingTimer.scheduleAtFixedRate(offTask, searchPeriod/2, searchPeriod);
-        }
-    }
-
-    private void stopSearching(){
-        onTask.cancel();
-        offTask.cancel();
-        stopRanging();
-    }
 
     private void startRanging(){
         // Start ranging.
@@ -174,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Register the receiver.
-        registerReceiver(urlReceiver, urlFilter);
+        registerReceiver(uidReceiver, uidFilter);
     }
 
     private void stopRanging(){
@@ -189,26 +146,26 @@ public class MainActivity extends AppCompatActivity {
 
         // Unregister the receiver
         try{
-            unregisterReceiver(urlReceiver);
+            unregisterReceiver(uidReceiver);
         }catch(IllegalArgumentException e){
             e.printStackTrace();
         }
     }
 
-    private void makeRequestToUrl(String url){
+    private void makeRequestToUrl(String uri){
 
-        // TODO: Perhaps parse the url to know what to do with it. For testing purposes, I am
-        // TODO: just making making a get request on that url.
-        APIClient.get(url, new JsonHttpResponseHandler() {
+        APIClient.hitBeacon(uri, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
                     // Get the data from the response
+                    Log.d(TAG, "SUCCESSSS!");
+                    Log.d(TAG, response.toString());
                     JSONObject data = response.getJSONObject("data");
 
                     // TODO: We will need to make classes to deserialize the data into and do stuff with.
                     Log.d(TAG, data.toString());
-                    makeToast("GOT THE DATA :)");
+                    makeToast(data.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

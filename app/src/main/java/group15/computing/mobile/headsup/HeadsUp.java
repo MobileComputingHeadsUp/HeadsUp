@@ -36,7 +36,7 @@ public class HeadsUp extends Application implements BeaconConsumer, Observer {
         // Set up the beacon manager to look for eddystone URL frames.
         beaconManager = BeaconManager.getInstanceForApplication(this);
         beaconManager.getBeaconParsers().add(new BeaconParser().
-                setBeaconLayout("s:0-1=feaa,m:2-2=10,p:3-3:-41,i:4-20v"));
+                setBeaconLayout(Constants.UID_LAYOUT));
         beaconManager.bind(this);
     }
 

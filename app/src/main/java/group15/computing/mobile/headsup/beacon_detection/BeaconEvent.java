@@ -37,7 +37,7 @@ public enum BeaconEvent {
             context.sendBroadcast(this.intent);
         }
     },
-    FOUND_URL(new Intent(Constants.URL_FOUND)){
+    FOUND_UID(new Intent(Constants.UID_FOUND)){
         @Override
         public void execute(Context context){
             context.sendBroadcast(this.intent);

@@ -19,6 +19,10 @@ public final class Constants {
     // Define a custom intent for beacon events.
     public static final String EXIT_REGION =
             "group15.computing.mobile.headsup.EXIT_REGION";
-    public static final String URL_FOUND =
+    public static final String UID_FOUND =
             "group15.computing.mobile.headsup.URL_FOUND";
+
+    public static final String UID_LAYOUT = "s:0-1=feaa,m:2-2=00,p:3-3:-41,i:4-13,i:14-19";
+
+    public static final String URL_LAYOUT = "s:0-1=feaa,m:2-2=10,p:3-3:-41,i:4-20v";
 }

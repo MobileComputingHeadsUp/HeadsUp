@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="group15.computing.mobile.headsup">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH" />
 
     <application
         android:name=".HeadsUp"
@@ -20,9 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activities.BeaconRangingActivity"
-            android:label="@string/beacon_monitoring"></activity>
         <activity
             android:name=".activities.SignInActivity"
             android:label="@string/sign_in"
