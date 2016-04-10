@@ -21,6 +21,7 @@ import com.google.android.gms.common.api.Status;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.Header;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -120,7 +121,7 @@ public class SignInActivity extends FragmentActivity implements GoogleApiClient.
             String idToken = acct.getIdToken();
             APIClient.signInUser(idToken, new JsonHttpResponseHandler() {
                 @Override
-                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                     if (statusCode == 500 || statusCode == 403) {
                         returnFailure();
                     }

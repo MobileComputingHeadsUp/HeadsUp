@@ -1,24 +1,18 @@
 package group15.computing.mobile.headsup.activities;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.RemoteException;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.altbeacon.beacon.BeaconManager;
@@ -27,15 +21,12 @@ import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import group15.computing.mobile.headsup.Auth.Authentication;
 import group15.computing.mobile.headsup.R;
 import group15.computing.mobile.headsup.beacon_detection.BeaconEvent;
+import group15.computing.mobile.headsup.beacon_detection.RequestedAction;
 import group15.computing.mobile.headsup.utilities.APIClient;
 import group15.computing.mobile.headsup.utilities.Constants;
-import group15.computing.mobile.headsup.utilities.SmartTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -157,18 +148,16 @@ public class MainActivity extends AppCompatActivity {
         APIClient.hitBeacon(uri, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
-                    // Get the data from the response
-                    Log.d(TAG, "SUCCESSSS!");
-                    Log.d(TAG, response.toString());
-                    JSONObject data = response.getJSONObject("data");
 
-                    // TODO: We will need to make classes to deserialize the data into and do stuff with.
-                    Log.d(TAG, data.toString());
-                    makeToast(data.toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                // Get the data from the response
+                Log.d(TAG, "SUCCESSSS!");
+                Log.d(TAG, response.toString());
+
+                String requestedAction = response.optString("action");
+                Log.d(TAG, "THE ACTION IS " + requestedAction);
+                RequestedAction action = RequestedAction.valueOf(requestedAction);
+                action.execute(MainActivity.this, response);
+
             }
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
