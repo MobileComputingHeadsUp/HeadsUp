@@ -5,9 +5,7 @@ import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import group15.computing.mobile.headsup.R;
 
 /**
  * Created by Bradley on 4/11/2016.

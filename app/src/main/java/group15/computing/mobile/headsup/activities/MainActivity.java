@@ -151,9 +151,6 @@ public class MainActivity extends AppCompatActivity {
 
                 try{
                     // Get the data from the response
-                    Log.d(TAG, "SUCCESSSS!");
-                    Log.d(TAG, response.toString());
-
                     String requestedAction = response.optString("action");
                     Log.d(TAG, "THE ACTION IS " + requestedAction);
                     RequestedAction action = RequestedAction.valueOf(requestedAction);
@@ -162,8 +159,6 @@ public class MainActivity extends AppCompatActivity {
                 }catch(JSONException e){
                     e.printStackTrace();
                 }
-
-
             }
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
