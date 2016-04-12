@@ -12,6 +12,7 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
+import group15.computing.mobile.headsup.activities.ProfileFormActivity;
 import group15.computing.mobile.headsup.utilities.Constants;
 
 
@@ -32,6 +33,10 @@ public enum RequestedAction {
         @Override
         public void execute(Context context, JSONObject data){
             Log.d(TAG, "REQUIRED_USER_INFO");
+            Intent i = new Intent(context, ProfileFormActivity.class);
+            i.putExtra(DATA, data.toString());
+            context.startActivity(i);
+
             // TODO: Build the form and go to that activity.
         }
     },
@@ -54,5 +59,6 @@ public enum RequestedAction {
 
     protected final static String TAG = "REQUESTED ACTION";
     public abstract void execute(Context context, JSONObject data);
+    public static final String DATA = "data";
 }
 

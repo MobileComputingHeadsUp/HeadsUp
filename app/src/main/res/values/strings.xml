@@ -7,4 +7,10 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="choice_prompt">Select a choice</string>
+    <string-array name="choices">
+        <item>Alpha</item>
+        <item>Bravo</item>
+        <item>Charlie</item>
+    </string-array>
 </resources>

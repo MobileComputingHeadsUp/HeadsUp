@@ -149,14 +149,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 
-                // Get the data from the response
-                Log.d(TAG, "SUCCESSSS!");
-                Log.d(TAG, response.toString());
+                try{
+                    // Get the data from the response
+                    Log.d(TAG, "SUCCESSSS!");
+                    Log.d(TAG, response.toString());
 
-                String requestedAction = response.optString("action");
-                Log.d(TAG, "THE ACTION IS " + requestedAction);
-                RequestedAction action = RequestedAction.valueOf(requestedAction);
-                action.execute(MainActivity.this, response);
+                    String requestedAction = response.optString("action");
+                    Log.d(TAG, "THE ACTION IS " + requestedAction);
+                    RequestedAction action = RequestedAction.valueOf(requestedAction);
+                    action.execute(MainActivity.this, response.getJSONObject("data"));
+                    stopRanging(); // TODO: Dont necesarilly stop ranging. For debugging this makes things easier.
+                }catch(JSONException e){
+                    e.printStackTrace();
+                }
+
 
             }
             @Override
