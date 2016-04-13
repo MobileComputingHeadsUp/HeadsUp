@@ -21,24 +21,13 @@ android {
         debug {
             storeFile file("debug.keystore")
         }
-
-
-//        myConfig {
-//            storeFile file("other.keystore")
-//            storePassword "android"
-//            keyAlias "androiddebugkey"
-//            keyPassword "android"
-//        }
     }
-
-
-//    buildTypes {
-//        foo {
-//            signingConfig signingConfigs.myConfig
-//        }
-//    }
 }
 
+
+repositories {
+    mavenCentral()
+}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -51,4 +40,5 @@ dependencies {
     compile 'org.apache.httpcomponents:httpcore:4.3.2'
     compile 'com.google.android.gms:play-services-auth:8.3.0'
     compile 'com.android.support:support-v4:23.2.1'
+    compile 'com.google.code.gson:gson:2.2.4'
 }

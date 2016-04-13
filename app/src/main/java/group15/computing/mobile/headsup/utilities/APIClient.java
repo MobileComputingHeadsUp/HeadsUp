@@ -35,7 +35,7 @@ public class APIClient {
         // Get the current user.
         User currentUser = Authentication.getInstance().getCurrentUser();
 
-        // Add the parameters
+        // Add the data
         String identifier = beaconId.split("x")[1]; // Remove the 0x part of the id.
         identifier = identifier.toUpperCase();
 
@@ -45,5 +45,19 @@ public class APIClient {
 
         // Make the request
         client.post(API_BASE_URL + "api/beacons/hit_beacon", params, responseHandler);
+    }
+
+    public static void addSpaceProfile(String spaceProfile, JsonHttpResponseHandler responseHandler){
+
+        // Get the current user.
+        User currentUser = Authentication.getInstance().getCurrentUser();
+
+        // Add the data to the request.
+        RequestParams params = new RequestParams();
+        params.put("google_id", currentUser.getId());
+        params.put("profile", spaceProfile);
+
+        // Make the request.
+        client.post(API_BASE_URL + "api/users/space_profile", params, responseHandler);
     }
 }

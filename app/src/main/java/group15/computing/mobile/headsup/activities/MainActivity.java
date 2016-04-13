@@ -104,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "RECEIVED URL");
                 String url = intent.getStringExtra(BeaconEvent.DATA);
                 makeToast("Beacon Found!");
-//                makeToast("Url " + url + " found.");
                 makeRequestToUrl(url);
             }
         };
@@ -149,16 +148,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 
-                try{
-                    // Get the data from the response
-                    String requestedAction = response.optString("action");
-                    Log.d(TAG, "THE ACTION IS " + requestedAction);
-                    RequestedAction action = RequestedAction.valueOf(requestedAction);
-                    action.execute(MainActivity.this, response.getJSONObject("data"));
-                    stopRanging(); // TODO: Dont necesarilly stop ranging. For debugging this makes things easier.
-                }catch(JSONException e){
-                    e.printStackTrace();
-                }
+
+                // Get the data from the response
+                String requestedAction = response.optString("action");
+                Log.d(TAG, "THE ACTION IS " + requestedAction);
+                RequestedAction action = RequestedAction.valueOf(requestedAction);
+                action.execute(MainActivity.this, response);
+                stopRanging(); // TODO: Dont necesarilly stop ranging. For debugging this makes things easier.
+
             }
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
