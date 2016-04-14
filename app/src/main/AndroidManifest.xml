@@ -15,7 +15,7 @@
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.WithActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,8 +25,10 @@
         <activity
             android:name=".activities.SignInActivity"
             android:label="@string/sign_in"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".activities.ProfileFormActivity"></activity>
+            android:theme="@style/AppTheme.WithActionBar"></activity>
+        <activity
+            android:name=".activities.ProfileFormActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
     </application>
 
 </manifest>

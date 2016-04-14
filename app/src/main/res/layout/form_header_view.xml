@@ -9,20 +9,22 @@
     android:paddingTop="@dimen/activity_vertical_margin">
 
     <TextView
-        android:layout_centerVertical="true"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/text"
-        android:textSize="14sp"
-        android:text="Pick an option, any option!"
+        android:layout_height="wrap_content"
+        android:id="@+id/headerText"
+        android:textSize="16sp"
+        android:text="This is a section header hehehe"
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/primary_text"/>
+
+    <TextView
+        android:layout_below="@+id/headerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/headerSubText"
+        android:textSize="12sp"
+        android:text="hi im sub subby text"
         android:layout_alignParentLeft="true"
         android:textColor="@color/secondary_text"/>
 
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:id="@+id/spin"
-        android:layout_below="@+id/text"/>
 </RelativeLayout>

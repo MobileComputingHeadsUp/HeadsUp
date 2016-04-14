@@ -10,11 +10,15 @@ public class SpaceProfile {
 
     static class Data{
         protected ArrayList<HashMap<String, String>> dropdowns;
+        protected ArrayList<HashMap<String, String[]>> checkAllThatApplys;
+        protected ArrayList<HashMap<String, String>> freeResponses;
 
-        public Data(){
-            dropdowns = new ArrayList<>();
+        public Data() {
+            this.dropdowns = new ArrayList<>();
+            this.checkAllThatApplys = new ArrayList<>();
+            this.freeResponses = new ArrayList<>();
         }
-        // TODO: Implement for other forms too.
+
     }
 
     private String spaceID;
@@ -29,6 +33,14 @@ public class SpaceProfile {
 
     public void addDropdown(HashMap<String, String> dropdown){
         data.dropdowns.add(dropdown);
+    }
+
+    public void addCheck(HashMap<String, String[]> check){
+        data.checkAllThatApplys.add(check);
+    }
+
+    public void addFreeResponse(HashMap<String, String> freeResponse){
+        data.freeResponses.add(freeResponse);
     }
 
     public void clearData(){
