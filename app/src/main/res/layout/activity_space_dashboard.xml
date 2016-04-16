@@ -10,9 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:viewpager_logo="@layout/header_logo"
-        app:viewpager_pagerTitleStrip="@layout/material_view_pager_pagertitlestrip_newstand"
+        app:viewpager_pagerTitleStrip="@layout/tabs"
         app:viewpager_logoMarginTop="100dp"
-        app:viewpager_color="@color/colorPrimary"
+        app:viewpager_color="@color/white"
         app:viewpager_headerHeight="200dp"
         app:viewpager_headerAlpha="1.0"
         app:viewpager_imageHeaderDarkLayerAlpha="0.2"
@@ -24,7 +24,6 @@
         app:viewpager_displayToolbarWhenSwipe="true"
         app:viewpager_transparentToolbar="false"
         app:viewpager_animatedHeaderImage="true"
-
         />
 
     <include layout="@layout/drawer" />

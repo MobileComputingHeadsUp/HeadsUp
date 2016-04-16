@@ -16,9 +16,13 @@ import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
 
 import group15.computing.mobile.headsup.R;
+import group15.computing.mobile.headsup.fragments.HomeRecyclerViewFragment;
 import group15.computing.mobile.headsup.fragments.RecyclerViewFragment;
+import group15.computing.mobile.headsup.utilities.Utilities;
 
 public class SpaceDashboard extends AppCompatActivity {
+
+    public static String DATA = "space_data";
 
     private MaterialViewPager mViewPager;
 
@@ -30,6 +34,9 @@ public class SpaceDashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_space_dashboard);
+
+        // Get the feed Data.
+        final String feedData = Utilities.loadJSONFromAsset("dummy_space_feed.json", SpaceDashboard.this);
 
         // Get the ViewPager
         mViewPager = (MaterialViewPager) findViewById(R.id.materialViewPager);
@@ -61,14 +68,20 @@ public class SpaceDashboard extends AppCompatActivity {
 
             @Override
             public Fragment getItem(int position) {
+
+                // Setup fragment arguments. They need the data!
+                Bundle bundle = new Bundle();
+                bundle.putString(DATA, feedData);
+
                 switch (position % 3) {
                     //case 0:
                     //    return RecyclerViewFragment.newInstance();
                     //case 1:
                     //    return RecyclerViewFragment.newInstance();
                     default:
-//                        return null;
-                        return RecyclerViewFragment.newInstance();
+                        HomeRecyclerViewFragment fragment = new HomeRecyclerViewFragment();
+                        fragment.setArguments(bundle);
+                        return fragment;
                 }
             }
 
