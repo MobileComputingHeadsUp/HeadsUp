@@ -29,6 +29,7 @@ import group15.computing.mobile.headsup.Forms.SpaceProfileFormAdapter;
 import group15.computing.mobile.headsup.Forms.DropdownRow;
 import group15.computing.mobile.headsup.Forms.SpaceProfile;
 import group15.computing.mobile.headsup.R;
+import group15.computing.mobile.headsup.beacon_detection.RequestedAction;
 import group15.computing.mobile.headsup.utilities.APIClient;
 import group15.computing.mobile.headsup.utilities.Utilities;
 
@@ -47,8 +48,8 @@ public class ProfileFormActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile_form);
 
         // TODO: Uncomment out. commented out currently bcs I am reading a dummy json file
-//        String response = getIntent().getStringExtra(RequestedAction.DATA);
-        String response = Utilities.loadJSONFromAsset("dummy_form.json", this);
+        String response = getIntent().getStringExtra(RequestedAction.DATA);
+//        String response = Utilities.loadJSONFromAsset("dummy_form.json", this);
         createUserProfile(response);
         buildForm(response);
 

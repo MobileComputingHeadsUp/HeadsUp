@@ -52,18 +52,12 @@ public class ChecklistRow extends FormRow {
             }
         }
 
-        // Create dictionary of string to array of strings to represent
-        // Question and checked options
-        HashMap<String, String[]> checkDictionary = new HashMap<>();
 
         // Convert the array-list to a string array
         String []arr = checkedOptions.toArray(new String[checkedOptions.size()]);
 
-        // Put it in the check dict.
-        checkDictionary.put(getLabel(), arr);
-
         // Add to the space profile
-        spaceProfile.addCheck(checkDictionary);
+        spaceProfile.addCheck(getLabel(), arr);
     }
 
     @Override

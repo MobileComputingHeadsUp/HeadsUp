@@ -9,16 +9,15 @@ import java.util.HashMap;
 public class SpaceProfile {
 
     static class Data{
-        protected ArrayList<HashMap<String, String>> dropdowns;
-        protected ArrayList<HashMap<String, String[]>> checkAllThatApplys;
-        protected ArrayList<HashMap<String, String>> freeResponses;
+        protected HashMap<String, String> dropdowns;
+        protected HashMap<String, String[]> checkAllThatApplies;
+        protected HashMap<String, String> freeResponses;
 
         public Data() {
-            this.dropdowns = new ArrayList<>();
-            this.checkAllThatApplys = new ArrayList<>();
-            this.freeResponses = new ArrayList<>();
+            this.dropdowns = new HashMap<>();
+            this.checkAllThatApplies = new HashMap<>();
+            this.freeResponses = new HashMap<>();
         }
-
     }
 
     private String spaceID;
@@ -31,16 +30,16 @@ public class SpaceProfile {
         this.data = new Data();
     }
 
-    public void addDropdown(HashMap<String, String> dropdown){
-        data.dropdowns.add(dropdown);
+    public void addDropdown(String key, String value){
+        data.dropdowns.put(key, value);
     }
 
-    public void addCheck(HashMap<String, String[]> check){
-        data.checkAllThatApplys.add(check);
+    public void addCheck(String key, String[] value){
+        data.checkAllThatApplies.put(key, value);
     }
 
-    public void addFreeResponse(HashMap<String, String> freeResponse){
-        data.freeResponses.add(freeResponse);
+    public void addFreeResponse(String key, String value){
+        data.freeResponses.put(key, value);
     }
 
     public void clearData(){

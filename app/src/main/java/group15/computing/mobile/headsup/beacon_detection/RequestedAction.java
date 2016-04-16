@@ -61,4 +61,3 @@ public enum RequestedAction {
     public abstract void execute(Context context, JSONObject data);
     public static final String DATA = "data";
 }
-

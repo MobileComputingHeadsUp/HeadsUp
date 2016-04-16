@@ -48,12 +48,9 @@ public class DropdownRow extends FormRow {
 
     @Override
     public void addDataToSpaceProfile(SpaceProfile spaceProfile) {
-        // Make key-value of string to string
-        HashMap<String, String> dropdownValue = new HashMap<>();
-        dropdownValue.put(getLabel(), getAdapter().getItem(getSelected()));
 
         // Add it to the space profile
-        spaceProfile.addDropdown(dropdownValue);
+        spaceProfile.addDropdown(getLabel(), getAdapter().getItem(getSelected()));
     }
 
     @Override
