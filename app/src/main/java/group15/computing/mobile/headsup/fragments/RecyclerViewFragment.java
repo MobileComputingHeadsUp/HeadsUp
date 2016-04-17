@@ -19,6 +19,7 @@ import java.util.List;
 
 import group15.computing.mobile.headsup.R;
 import group15.computing.mobile.headsup.SpaceDash.RecyclerViewAdapter;
+import group15.computing.mobile.headsup.SpaceDash.SpaceItem;
 import group15.computing.mobile.headsup.activities.SpaceDashboard;
 
 public abstract class RecyclerViewFragment extends Fragment {
@@ -27,9 +28,7 @@ public abstract class RecyclerViewFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private String data;
 
-    private static final int ITEM_COUNT = 100; // TODO: This needs to be dynaamic
-
-    protected List<Object> mContentItems = new ArrayList<>();
+    protected List<SpaceItem> mContentItems = new ArrayList<>();
 
 
     @Override

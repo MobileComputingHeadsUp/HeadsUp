@@ -16,8 +16,10 @@ import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
 
 import group15.computing.mobile.headsup.R;
+import group15.computing.mobile.headsup.fragments.AnnouncementsRecyclerViewFragment;
 import group15.computing.mobile.headsup.fragments.HomeRecyclerViewFragment;
 import group15.computing.mobile.headsup.fragments.RecyclerViewFragment;
+import group15.computing.mobile.headsup.fragments.UsersRecyclerViewFragment;
 import group15.computing.mobile.headsup.utilities.Utilities;
 
 public class SpaceDashboard extends AppCompatActivity {
@@ -74,14 +76,18 @@ public class SpaceDashboard extends AppCompatActivity {
                 bundle.putString(DATA, feedData);
 
                 switch (position % 3) {
-                    //case 0:
-                    //    return RecyclerViewFragment.newInstance();
-                    //case 1:
-                    //    return RecyclerViewFragment.newInstance();
+                    case 0:
+                        HomeRecyclerViewFragment home = new HomeRecyclerViewFragment();
+                        home.setArguments(bundle);
+                        return home;
+                    case 1:
+                        UsersRecyclerViewFragment users = new UsersRecyclerViewFragment();
+                        users.setArguments(bundle);
+                        return users;
                     default:
-                        HomeRecyclerViewFragment fragment = new HomeRecyclerViewFragment();
-                        fragment.setArguments(bundle);
-                        return fragment;
+                        AnnouncementsRecyclerViewFragment announcements = new AnnouncementsRecyclerViewFragment();
+                        announcements.setArguments(bundle);
+                        return announcements;
                 }
             }
 
@@ -122,10 +128,6 @@ public class SpaceDashboard extends AppCompatActivity {
                         return HeaderDesign.fromColorResAndUrl(
                                 R.color.cyan,
                                 "http://www.droid-life.com/wp-content/uploads/2014/10/lollipop-wallpapers10.jpg");
-//                    case 3:
-//                        return HeaderDesign.fromColorResAndUrl(
-//                                R.color.red,
-//                                "http://www.tothemobile.com/wp-content/uploads/2014/07/original.jpg");
                 }
                 return null;
             }
@@ -138,8 +140,6 @@ public class SpaceDashboard extends AppCompatActivity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-
-        // Syncronize the state with the DrawerLayout
         mDrawerToggle.syncState();
     }
 

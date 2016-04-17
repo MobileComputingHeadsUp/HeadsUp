@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.github.florent37.materialviewpager.adapter.RecyclerViewMaterialAdapter;
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -19,18 +20,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import group15.computing.mobile.headsup.R;
+import group15.computing.mobile.headsup.SpaceDash.AdSpaceItem;
+import group15.computing.mobile.headsup.SpaceDash.AnnouncementSpaceItem;
 import group15.computing.mobile.headsup.SpaceDash.RecyclerViewAdapter;
+import group15.computing.mobile.headsup.SpaceDash.SpaceDashContent;
+import group15.computing.mobile.headsup.SpaceDash.UserSpaceItem;
 
 public class HomeRecyclerViewFragment extends RecyclerViewFragment {
 
     @Override
     public void generateContentFromJson(String data) {
 
-        Log.d("BLAHLBLHLSDLKN", data);
+        Gson gson = new Gson();
+        SpaceDashContent content = gson.fromJson(data, SpaceDashContent.class);
 
-        int ITEM_COUNT = 100;
-        for(int i = 0; i < ITEM_COUNT; i++){
-            mContentItems.add(new Object());
+        for(AnnouncementSpaceItem announcement : content.getAnnouncementSpaceItems()){
+            mContentItems.add(announcement);
+        }
+        for(AdSpaceItem ad : content.getAdSpaceItems()){
+            mContentItems.add(ad);
+        }
+        for(UserSpaceItem user : content.getUserSpaceItems()){
+            mContentItems.add(user);
         }
     }
 }

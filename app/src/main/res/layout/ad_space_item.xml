@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="2dp"
+        android:layout_marginBottom="@dimen/cardMarginVertical"
+        android:layout_marginLeft="@dimen/cardMarginHorizontal"
+        android:layout_marginRight="@dimen/cardMarginHorizontal"
+        android:layout_marginTop="@dimen/cardMarginVertical"
+        app:cardPreventCornerOverlap="false"
+        app:contentPadding="16dp">
+        <RelativeLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Come get free beer!"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimary"/>
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="If you come to the bar within 10 seconds you can have free beer! Everyone run now!"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/title"
+                android:paddingTop="8dp"
+                android:textSize="12sp"
+                android:textColor="@color/secondary_text"/>
+                <ImageView
+                    android:id="@+id/adImage"
+                    android:layout_width="fill_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="5dp"
+                    android:layout_centerVertical="true"
+                    android:layout_below="@+id/description"
+                    android:src="@drawable/placeholder" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</FrameLayout>

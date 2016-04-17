@@ -2,6 +2,7 @@ package group15.computing.mobile.headsup.SpaceDash;
 
 import android.content.Context;
 import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * Created by Bradley on 4/16/16.
@@ -11,8 +12,7 @@ public abstract class SpaceItem {
     public enum SpaceItemType{
         USER,
         AD,
-        ANNOUNCEMENT,
-        SENSOR
+        ANNOUNCEMENT
     }
 
     private SpaceItemType type;
@@ -25,7 +25,7 @@ public abstract class SpaceItem {
         return this.type;
     }
 
-    public abstract View getInflatedLayout(Context context);
+    public abstract View getInflatedLayout(ViewGroup parent);
 
     public abstract void configView(View convertView);
 }
