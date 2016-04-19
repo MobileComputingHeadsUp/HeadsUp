@@ -1,4 +1,4 @@
-package group15.computing.mobile.headsup.fragments;
+package group15.computing.mobile.headsup.SpaceDash;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,7 +16,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.PriorityQueue;
 
+import group15.computing.mobile.headsup.Forms.SpaceProfile;
 import group15.computing.mobile.headsup.R;
 import group15.computing.mobile.headsup.SpaceDash.RecyclerViewAdapter;
 import group15.computing.mobile.headsup.SpaceDash.SpaceItem;
@@ -29,6 +31,7 @@ public abstract class RecyclerViewFragment extends Fragment {
     private String data;
 
     protected List<SpaceItem> mContentItems = new ArrayList<>();
+    protected PriorityQueue<SpaceItem> itemSorter = new PriorityQueue<>(5, new SpaceItemComparator());
 
 
     @Override

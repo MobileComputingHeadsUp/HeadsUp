@@ -22,8 +22,8 @@ public class AdSpaceItem extends SpaceItem{
     private String imgUrl;
     private String link;
 
-    public AdSpaceItem(String title, String description, String imgUrl, String link){
-        super(SpaceItemType.AD);
+    public AdSpaceItem(long timestamp, String title, String description, String imgUrl, String link){
+        super(SpaceItemType.AD, timestamp);
         this.title = title;
         this.description = description;
         this.imgUrl = imgUrl;

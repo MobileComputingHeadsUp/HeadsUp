@@ -25,8 +25,8 @@ public class UserSpaceItem extends SpaceItem{
 
     // TODO: This View and the data shown needs more.
 
-    public UserSpaceItem(String name, String pictureUrl, SpaceProfile profile){
-        super(SpaceItem.SpaceItemType.USER);
+    public UserSpaceItem(long timestamp, String name, String pictureUrl, SpaceProfile profile){
+        super(SpaceItem.SpaceItemType.USER, timestamp);
         this.name = name;
         this.pictureUrl = pictureUrl;
         this.profile = profile;

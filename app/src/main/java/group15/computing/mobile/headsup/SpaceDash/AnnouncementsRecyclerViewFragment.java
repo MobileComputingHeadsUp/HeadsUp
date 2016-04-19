@@ -1,11 +1,6 @@
-package group15.computing.mobile.headsup.fragments;
+package group15.computing.mobile.headsup.SpaceDash;
 
 import com.google.gson.Gson;
-
-import group15.computing.mobile.headsup.SpaceDash.AdSpaceItem;
-import group15.computing.mobile.headsup.SpaceDash.AnnouncementSpaceItem;
-import group15.computing.mobile.headsup.SpaceDash.SpaceDashContent;
-import group15.computing.mobile.headsup.SpaceDash.UserSpaceItem;
 
 public class AnnouncementsRecyclerViewFragment extends RecyclerViewFragment {
 
@@ -16,10 +11,15 @@ public class AnnouncementsRecyclerViewFragment extends RecyclerViewFragment {
         SpaceDashContent content = gson.fromJson(data, SpaceDashContent.class);
 
         for(AnnouncementSpaceItem announcement : content.getAnnouncementSpaceItems()){
-            mContentItems.add(announcement);
+            itemSorter.offer(announcement);
         }
         for(AdSpaceItem ad : content.getAdSpaceItems()){
-            mContentItems.add(ad);
+            itemSorter.offer(ad);
+        }
+
+        // Put the items into the content in order.
+        while(!itemSorter.isEmpty()){
+            mContentItems.add(itemSorter.poll());
         }
     }
 }

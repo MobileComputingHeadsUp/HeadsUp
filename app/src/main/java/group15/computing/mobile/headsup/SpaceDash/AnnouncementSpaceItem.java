@@ -15,8 +15,8 @@ public class AnnouncementSpaceItem extends SpaceItem {
 
     private String text;
 
-    public AnnouncementSpaceItem(String text){
-        super(SpaceItemType.ANNOUNCEMENT);
+    public AnnouncementSpaceItem(long timestamp, String text){
+        super(SpaceItemType.ANNOUNCEMENT, timestamp);
         this.text = text;
     }
 

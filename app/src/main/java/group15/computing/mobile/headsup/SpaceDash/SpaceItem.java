@@ -16,9 +16,18 @@ public abstract class SpaceItem {
     }
 
     private SpaceItemType type;
+    private long timestamp;
 
-    public SpaceItem(SpaceItemType type){
+    public long getTimestamp() {
+        return timestamp;
+    }
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public SpaceItem(SpaceItemType type, long timestamp){
         this.type = type;
+        this.timestamp = timestamp;
     }
 
     public SpaceItemType getType(){

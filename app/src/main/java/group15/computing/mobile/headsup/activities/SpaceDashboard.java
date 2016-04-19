@@ -8,18 +8,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Toolbar;
 
 import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
 
 import group15.computing.mobile.headsup.R;
-import group15.computing.mobile.headsup.fragments.AnnouncementsRecyclerViewFragment;
-import group15.computing.mobile.headsup.fragments.HomeRecyclerViewFragment;
-import group15.computing.mobile.headsup.fragments.RecyclerViewFragment;
-import group15.computing.mobile.headsup.fragments.UsersRecyclerViewFragment;
+import group15.computing.mobile.headsup.SpaceDash.AnnouncementsRecyclerViewFragment;
+import group15.computing.mobile.headsup.SpaceDash.HomeRecyclerViewFragment;
+import group15.computing.mobile.headsup.SpaceDash.UsersRecyclerViewFragment;
 import group15.computing.mobile.headsup.utilities.Utilities;
 
 public class SpaceDashboard extends AppCompatActivity {
