@@ -23,6 +23,16 @@ public class SpaceDashContent {
     private ArrayList<AnnouncementSpaceItem> announcements;
     private ArrayList<UserSpaceItem> users;
 
+    public ArrayList<MatchedUserSpaceItem> getMatchedUsers() {
+        return matchedUsers;
+    }
+
+    public void setMatchedUsers(ArrayList<MatchedUserSpaceItem> matchedUsers) {
+        this.matchedUsers = matchedUsers;
+    }
+
+    private ArrayList<MatchedUserSpaceItem> matchedUsers;
+
     public ArrayList<AdSpaceItem> getAdSpaceItems() {
         return ads;
     }

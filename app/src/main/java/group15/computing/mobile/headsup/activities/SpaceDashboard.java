@@ -47,7 +47,7 @@ public class SpaceDashboard extends AppCompatActivity {
         // Set the header text
         headerLogo = (TextView) findViewById(R.id.space_dash_header);
         headerLogo.setText(content.getSpace_name());
-        
+
         // Get the ViewPager
         mViewPager = (MaterialViewPager) findViewById(R.id.materialViewPager);
 
@@ -124,20 +124,23 @@ public class SpaceDashboard extends AppCompatActivity {
             @Override
             public HeaderDesign getHeaderDesign(int page) {
                 switch (page) {
-                    case 0:
+//                    case 0:
+//                        return HeaderDesign.fromColorResAndUrl(
+//                                R.color.blue,
+//                                "http://www.wallpaperhi.com/thumbnails/detail/20140629/clouds%20nature%20planets%20earth%20low%20resolution_www.wallpaperhi.com_38.jpg");
+//                    case 1:
+//                        return HeaderDesign.fromColorResAndUrl(
+//                                R.color.green,
+//                                "http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2014/06/wallpaper_51.jpg");
+//                    case 2:
+//                        return HeaderDesign.fromColorResAndUrl(
+//                                R.color.cyan,
+//                                "http://www.droid-life.com/wp-content/uploads/2014/10/lollipop-wallpapers10.jpg");
+                    default:
                         return HeaderDesign.fromColorResAndUrl(
-                                R.color.blue,
-                                "http://www.wallpaperhi.com/thumbnails/detail/20140629/clouds%20nature%20planets%20earth%20low%20resolution_www.wallpaperhi.com_38.jpg");
-                    case 1:
-                        return HeaderDesign.fromColorResAndUrl(
-                                R.color.green,
-                                "http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2014/06/wallpaper_51.jpg");
-                    case 2:
-                        return HeaderDesign.fromColorResAndUrl(
-                                R.color.cyan,
-                                "http://www.droid-life.com/wp-content/uploads/2014/10/lollipop-wallpapers10.jpg");
+                                R.color.primary,
+                                "http://spaceflight.nasa.gov/gallery/images/station/crew-24/hires/iss024e013421.jpg");
                 }
-                return null;
             }
         });
 

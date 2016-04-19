@@ -18,8 +18,8 @@ public class HomeRecyclerViewFragment extends RecyclerViewFragment {
         for(AdSpaceItem ad : content.getAdSpaceItems()){
             itemSorter.offer(ad);
         }
-        for(UserSpaceItem user : content.getUserSpaceItems()){
-            itemSorter.offer(user);
+        for(MatchedUserSpaceItem matchedUser : content.getMatchedUsers()){
+            itemSorter.offer(matchedUser);
         }
 
         // Put the items into the content in order.

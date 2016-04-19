@@ -21,15 +21,17 @@ import group15.computing.mobile.headsup.R;
 public class UserSpaceItem extends SpaceItem{
     private String name;
     private String pictureUrl;
-    private SpaceProfile profile;
+    private String bio;
+    private String gender;
+    private String age;
 
-    // TODO: This View and the data shown needs more.
-
-    public UserSpaceItem(long timestamp, String name, String pictureUrl, SpaceProfile profile){
-        super(SpaceItem.SpaceItemType.USER, timestamp);
+    public UserSpaceItem(long timestamp, String name, String pictureUrl, String bio, String gender, String age){
+        super(timestamp);
         this.name = name;
         this.pictureUrl = pictureUrl;
-        this.profile = profile;
+        this.bio = bio;
+        this.gender = gender;
+        this.age = age;
     }
 
     @Override
@@ -42,8 +44,10 @@ public class UserSpaceItem extends SpaceItem{
     public void configView(View convertView) {
 
         TextView name = (TextView) convertView.findViewById(R.id.name);
+        TextView bio = (TextView) convertView.findViewById(R.id.bio);
+        TextView gender = (TextView) convertView.findViewById(R.id.gender);
+        TextView age = (TextView) convertView.findViewById(R.id.age);
         ImageView picture = (ImageView) convertView.findViewById(R.id.picture);
-        CardView userCard = (CardView) convertView.findViewById(R.id.user_card_view);
 
         final Context context = convertView.getContext();
 
@@ -51,17 +55,17 @@ public class UserSpaceItem extends SpaceItem{
         if(name!=null){
             name.setText(this.name);
         }
+        if(bio!=null){
+            bio.setText("Bio: " + this.bio);
+        }
+        if(gender!=null){
+            gender.setText("Gender: " + this.gender);
+        }
+        if(age!=null){
+            age.setText("Age: " + this.age);
+        }
         if(picture!=null && this.pictureUrl.length()>0){
             Picasso.with(context).load(this.pictureUrl).into(picture);
-        }
-
-        if(userCard!=null){
-            userCard.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // TODO: Show profile details on click.
-                }
-            });
         }
     }
 }

@@ -17,6 +17,9 @@ public class UsersRecyclerViewFragment extends RecyclerViewFragment {
         for(UserSpaceItem user : content.getUserSpaceItems()){
             itemSorter.offer(user);
         }
+        for(MatchedUserSpaceItem matchedUser : content.getMatchedUsers()){
+            itemSorter.offer(matchedUser);
+        }
 
         // Put the items into the content in order.
         while(!itemSorter.isEmpty()){

@@ -30,6 +30,15 @@
                 app:siBorderColor="@color/accent"
                 android:src="@drawable/placeholder"/>
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:textSize="12sp"
+                android:textColor="@color/accent"
+                android:text="Matched!"/>
+
+            <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

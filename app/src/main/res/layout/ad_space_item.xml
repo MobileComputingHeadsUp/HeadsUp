@@ -15,7 +15,7 @@
         android:layout_marginRight="@dimen/cardMarginHorizontal"
         android:layout_marginTop="@dimen/cardMarginVertical"
         app:cardPreventCornerOverlap="false"
-        app:contentPadding="16dp">
+        app:contentPadding="12dp">
         <RelativeLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent">

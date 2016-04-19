@@ -9,13 +9,7 @@ import android.view.ViewGroup;
  */
 public abstract class SpaceItem {
 
-    public enum SpaceItemType{
-        USER,
-        AD,
-        ANNOUNCEMENT
-    }
 
-    private SpaceItemType type;
     private long timestamp;
 
     public long getTimestamp() {
@@ -25,13 +19,8 @@ public abstract class SpaceItem {
         this.timestamp = timestamp;
     }
 
-    public SpaceItem(SpaceItemType type, long timestamp){
-        this.type = type;
+    public SpaceItem(long timestamp){
         this.timestamp = timestamp;
-    }
-
-    public SpaceItemType getType(){
-        return this.type;
     }
 
     public abstract View getInflatedLayout(ViewGroup parent);
