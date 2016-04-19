@@ -1,5 +1,7 @@
 package group15.computing.mobile.headsup.SpaceDash;
 
+import android.widget.TextView;
+
 import com.google.gson.Gson;
 
 public class HomeRecyclerViewFragment extends RecyclerViewFragment {

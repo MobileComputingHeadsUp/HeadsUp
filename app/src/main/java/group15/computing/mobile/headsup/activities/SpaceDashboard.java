@@ -8,13 +8,16 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
+import com.google.gson.Gson;
 
 import group15.computing.mobile.headsup.R;
 import group15.computing.mobile.headsup.SpaceDash.AnnouncementsRecyclerViewFragment;
 import group15.computing.mobile.headsup.SpaceDash.HomeRecyclerViewFragment;
+import group15.computing.mobile.headsup.SpaceDash.SpaceDashContent;
 import group15.computing.mobile.headsup.SpaceDash.UsersRecyclerViewFragment;
 import group15.computing.mobile.headsup.utilities.Utilities;
 
@@ -27,6 +30,7 @@ public class SpaceDashboard extends AppCompatActivity {
     private DrawerLayout mDrawer;
     private ActionBarDrawerToggle mDrawerToggle;
     private android.support.v7.widget.Toolbar toolbar;
+    private TextView headerLogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,14 @@ public class SpaceDashboard extends AppCompatActivity {
         // Get the feed Data.
         final String feedData = Utilities.loadJSONFromAsset("dummy_space_feed.json", SpaceDashboard.this);
 
+        // Convert the jsonData to a content object.
+        Gson gson = new Gson();
+        SpaceDashContent content = gson.fromJson(feedData, SpaceDashContent.class);
+
+        // Set the header text
+        headerLogo = (TextView) findViewById(R.id.space_dash_header);
+        headerLogo.setText(content.getSpace_name());
+        
         // Get the ViewPager
         mViewPager = (MaterialViewPager) findViewById(R.id.materialViewPager);
 
@@ -114,11 +126,11 @@ public class SpaceDashboard extends AppCompatActivity {
                 switch (page) {
                     case 0:
                         return HeaderDesign.fromColorResAndUrl(
-                                R.color.green,
-                                "https://fs01.androidpit.info/a/63/0e/android-l-wallpapers-630ea6-h900.jpg");
+                                R.color.blue,
+                                "http://www.wallpaperhi.com/thumbnails/detail/20140629/clouds%20nature%20planets%20earth%20low%20resolution_www.wallpaperhi.com_38.jpg");
                     case 1:
                         return HeaderDesign.fromColorResAndUrl(
-                                R.color.blue,
+                                R.color.green,
                                 "http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2014/06/wallpaper_51.jpg");
                     case 2:
                         return HeaderDesign.fromColorResAndUrl(

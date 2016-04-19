@@ -9,6 +9,16 @@ import group15.computing.mobile.headsup.Auth.User;
  */
 public class SpaceDashContent {
 
+    private String space_name;
+
+    public String getSpace_name() {
+        return space_name;
+    }
+
+    public void setSpace_name(String space_name) {
+        this.space_name = space_name;
+    }
+
     private ArrayList<AdSpaceItem> ads;
     private ArrayList<AnnouncementSpaceItem> announcements;
     private ArrayList<UserSpaceItem> users;
