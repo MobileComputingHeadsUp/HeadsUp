@@ -19,7 +19,7 @@ import group15.computing.mobile.headsup.Auth.User;
  */
 public class APIClient {
     private static AsyncHttpClient client = new AsyncHttpClient();
-    private static final String API_BASE_URL = "http://9cb14284.ngrok.io/";
+    private static final String API_BASE_URL = "http://3b96f8e4.ngrok.io/";
 
     public static void get(String url, JsonHttpResponseHandler responseHandler){
         client.get(API_BASE_URL + url, responseHandler);

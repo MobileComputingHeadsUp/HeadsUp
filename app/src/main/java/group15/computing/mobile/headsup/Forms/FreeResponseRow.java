@@ -64,12 +64,9 @@ public class FreeResponseRow extends FormRow {
 
     @Override
     public void addDataToSpaceProfile(SpaceProfile spaceProfile) {
-        // Make key-value of string to string, of question and answer
-        HashMap<String, String> freeResponseAnswer = new HashMap<>();
-        freeResponseAnswer.put(getLabel(),answer);
 
         // Add it to the space profile
-        spaceProfile.addFreeResponse(freeResponseAnswer);
+        spaceProfile.addFreeResponse(getLabel(), answer);
     }
 
     @Override
