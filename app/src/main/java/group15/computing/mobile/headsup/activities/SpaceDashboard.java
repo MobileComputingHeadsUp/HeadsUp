@@ -139,7 +139,7 @@ public class SpaceDashboard extends AppCompatActivity {
                     default:
                         return HeaderDesign.fromColorResAndUrl(
                                 R.color.primary,
-                                "http://spaceflight.nasa.gov/gallery/images/station/crew-24/hires/iss024e013421.jpg");
+                                "http://protiumdesign.com/wp-content/uploads/2015/04/Material-Design-Background-1024.jpg");
                 }
             }
         });

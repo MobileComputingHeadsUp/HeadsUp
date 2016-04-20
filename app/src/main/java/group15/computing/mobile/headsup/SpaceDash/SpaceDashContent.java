@@ -10,6 +10,11 @@ import group15.computing.mobile.headsup.Auth.User;
 public class SpaceDashContent {
 
     private String space_name;
+    private ArrayList<AdSpaceItem> ads;
+    private ArrayList<AnnouncementSpaceItem> announcements;
+    private ArrayList<UserSpaceItem> users;
+    private ArrayList<MatchedUserSpaceItem> matchedUsers;
+
 
     public String getSpace_name() {
         return space_name;
@@ -19,10 +24,6 @@ public class SpaceDashContent {
         this.space_name = space_name;
     }
 
-    private ArrayList<AdSpaceItem> ads;
-    private ArrayList<AnnouncementSpaceItem> announcements;
-    private ArrayList<UserSpaceItem> users;
-
     public ArrayList<MatchedUserSpaceItem> getMatchedUsers() {
         return matchedUsers;
     }
@@ -30,8 +31,6 @@ public class SpaceDashContent {
     public void setMatchedUsers(ArrayList<MatchedUserSpaceItem> matchedUsers) {
         this.matchedUsers = matchedUsers;
     }
-
-    private ArrayList<MatchedUserSpaceItem> matchedUsers;
 
     public ArrayList<AdSpaceItem> getAdSpaceItems() {
         return ads;

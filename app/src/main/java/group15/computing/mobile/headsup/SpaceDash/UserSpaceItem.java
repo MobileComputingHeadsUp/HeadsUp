@@ -68,4 +68,8 @@ public class UserSpaceItem extends SpaceItem{
             Picasso.with(context).load(this.pictureUrl).into(picture);
         }
     }
+
+    public String getName(){
+        return this.name;
+    }
 }

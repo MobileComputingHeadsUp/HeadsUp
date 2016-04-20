@@ -45,4 +45,18 @@ public class SpaceProfile {
     public void clearData(){
         this.data = new Data();
     }
+
+    public HashMap<String, String> getDropdowns() {
+        return data.dropdowns;
+    }
+
+    public HashMap<String, String[]> getCheckAllThatApplies() {
+        return data.checkAllThatApplies;
+    }
+
+    public HashMap<String, String> getFreeResponses() {
+        return data.freeResponses;
+    }
+
+
 }
