@@ -36,10 +36,34 @@ public class SpaceDashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_space_dashboard);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         // Get the feed Data.
-        final String feedData = Utilities.loadJSONFromAsset("dummy_space_feed.json", SpaceDashboard.this);
+        requestFeedData();
+    }
 
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+//        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return mDrawerToggle.onOptionsItemSelected(item) ||
+                super.onOptionsItemSelected(item);
+    }
+
+    private void requestFeedData(){
+        final String feedData = Utilities.loadJSONFromAsset("dummy_space_feed.json", SpaceDashboard.this);
+        createFeed(feedData);
+    }
+
+    private void createFeed(final String feedData){
         // Convert the jsonData to a content object.
         Gson gson = new Gson();
         SpaceDashContent content = gson.fromJson(feedData, SpaceDashContent.class);
@@ -146,17 +170,8 @@ public class SpaceDashboard extends AppCompatActivity {
 
         mViewPager.getViewPager().setOffscreenPageLimit(mViewPager.getViewPager().getAdapter().getCount());
         mViewPager.getPagerTitleStrip().setViewPager(mViewPager.getViewPager());
-    }
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
+        // Sync the state!
         mDrawerToggle.syncState();
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return mDrawerToggle.onOptionsItemSelected(item) ||
-                super.onOptionsItemSelected(item);
     }
 }

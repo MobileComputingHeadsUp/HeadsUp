@@ -5,8 +5,9 @@ package group15.computing.mobile.headsup.Auth;
  */
 public class Authentication {
 
-    private User currentUser;
     private static Authentication authentication;
+    private User currentUser;
+    private String currentSpaceID;
 
     private Authentication(){
 
@@ -26,6 +27,14 @@ public class Authentication {
 
     public boolean isSignedIn(){
         return currentUser!=null;
+    }
+
+    public String getCurrentSpaceID() {
+        return currentSpaceID;
+    }
+
+    public void setCurrentSpaceID(String currentSpaceID) {
+        this.currentSpaceID = currentSpaceID;
     }
 
     public static Authentication getInstance(){
