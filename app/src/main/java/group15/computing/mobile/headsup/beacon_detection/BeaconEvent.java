@@ -15,7 +15,7 @@ import group15.computing.mobile.headsup.utilities.Constants;
 public enum BeaconEvent {
 
     // This enum represents the events that can happen as a result of stuff with beacons.
-    ENTER_REGION(){
+    ENTER_REGION(){ // Used when monitering and enter region is called.
         @Override
         public void execute(Context context){
 
@@ -31,13 +31,19 @@ public enum BeaconEvent {
             }
         }
     },
-    EXIT_REGION(new Intent(Constants.EXIT_REGION)){
+    EXIT_REGION(new Intent(Constants.EXIT_REGION)){ // Used when montiering and exit region is called.
         @Override
         public void execute(Context context){
             context.sendBroadcast(this.intent);
         }
     },
-    FOUND_UID(new Intent(Constants.UID_FOUND)){
+    FOUND_UID(new Intent(Constants.UID_FOUND)){ // Used to broadcast a single UID when a beacon is found while ranging.
+        @Override
+        public void execute(Context context){
+            context.sendBroadcast(this.intent);
+        }
+    },
+    BEACONS_FOUND(new Intent(Constants.BEACONS_FOUND)){ // Used to broadcast an array (in json) of beaconIds found while ranging.
         @Override
         public void execute(Context context){
             context.sendBroadcast(this.intent);

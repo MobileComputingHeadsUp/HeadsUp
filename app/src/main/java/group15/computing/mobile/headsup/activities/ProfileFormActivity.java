@@ -183,7 +183,10 @@ public class ProfileFormActivity extends AppCompatActivity {
                 // Get the data from the response
                 Log.d(TAG, response.toString());
                 makeToast("Profile Created!");
-                // TODO: GO TO SPACE DASH
+
+                String requestedAction = response.optString("action");
+                RequestedAction action = RequestedAction.valueOf(requestedAction);
+                action.execute(ProfileFormActivity.this, response);
             }
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {

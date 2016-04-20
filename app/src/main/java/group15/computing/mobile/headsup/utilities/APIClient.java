@@ -4,6 +4,7 @@ import android.content.Context;
 import android.preference.PreferenceActivity;
 import android.util.Log;
 
+import com.google.android.gms.auth.api.Auth;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -59,5 +60,22 @@ public class APIClient {
 
         // Make the request.
         client.post(API_BASE_URL + "api/users/space_profile", params, responseHandler);
+    }
+
+    public static void requestSpaceDashFeed(String beacons, JsonHttpResponseHandler responseHandler){
+
+        // Get the current user and space_id.
+        Authentication auth = Authentication.getInstance();
+        String currentUserID = auth.getCurrentUser().getId();
+        String spaceID = auth.getCurrentSpaceID();
+
+        // Add the datat to the request.
+        RequestParams params = new RequestParams();
+        params.put("google_id", currentUserID);
+        params.put("space_id", spaceID);
+        params.put("beacons", beacons);
+
+        // Make the request.
+        client.post(API_BASE_URL + "api/space/dash", params, responseHandler);
     }
 }

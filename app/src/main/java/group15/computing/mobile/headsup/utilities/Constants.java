@@ -21,6 +21,8 @@ public final class Constants {
             "group15.computing.mobile.headsup.EXIT_REGION";
     public static final String UID_FOUND =
             "group15.computing.mobile.headsup.URL_FOUND";
+    public static final String BEACONS_FOUND =
+            "group15.computing.mobile.headsup.BEACONS_FOUND";
 
     public static final String UID_LAYOUT = "s:0-1=feaa,m:2-2=00,p:3-3:-41,i:4-13,i:14-19";
 
