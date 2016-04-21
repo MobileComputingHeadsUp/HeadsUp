@@ -25,5 +25,4 @@ public class User{
         return googleAccount.getId();
     }
 
-    // TODO: Add whatever accessors are necessary.
 }

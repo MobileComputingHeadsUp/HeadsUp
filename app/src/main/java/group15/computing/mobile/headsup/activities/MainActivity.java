@@ -11,8 +11,12 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.altbeacon.beacon.BeaconManager;
@@ -38,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
 
         // Create the timer and url broadcast receiever.
         createUrlListener();
@@ -55,8 +57,19 @@ public class MainActivity extends AppCompatActivity {
     public void onResume(){
         super.onResume();
 
+        TextView description = (TextView) findViewById(R.id.main_description);
         if(Authentication.getInstance().isSignedIn()){
+            description.setText("Don't worry! We're looking for spaces now.");
             startRanging();
+        }else{
+            description.setText("Tap to sign in.");
+            description.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(MainActivity.this, SignInActivity.class);
+                    startActivity(i);
+                }
+            });
         }
     }
 
@@ -146,9 +159,15 @@ public class MainActivity extends AppCompatActivity {
 
         APIClient.hitBeacon(uri, new JsonHttpResponseHandler() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+            public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Log.d(TAG, "Failed to retrieve data.");
 
+            }
 
+            @Override
+            public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
                 // Get the data from the response
                 String requestedAction = response.optString("action");
                 Log.d(TAG, "THE ACTION IS " + requestedAction);
@@ -156,12 +175,6 @@ public class MainActivity extends AppCompatActivity {
                 action.execute(MainActivity.this, response);
                 stopRanging(); // TODO: Dont necesarilly stop ranging. For debugging this makes things easier.
 
-            }
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
-                Log.d(TAG, "Failed to retrieve data.");
-//                makeToast("Failed to retrieve data.");
             }
         });
     }

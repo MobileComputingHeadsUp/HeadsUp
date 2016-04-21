@@ -13,7 +13,9 @@ import android.util.Log;
 import org.json.JSONObject;
 
 import group15.computing.mobile.headsup.activities.GenericUserInfoFormActivity;
+import group15.computing.mobile.headsup.Auth.Authentication;
 import group15.computing.mobile.headsup.activities.ProfileFormActivity;
+import group15.computing.mobile.headsup.activities.SpaceDashboard;
 import group15.computing.mobile.headsup.utilities.Constants;
 
 
@@ -37,8 +39,6 @@ public enum RequestedAction {
             Intent i = new Intent(context, ProfileFormActivity.class);
             i.putExtra(DATA, data.toString());
             context.startActivity(i);
-
-            // TODO: Build the form and go to that activity.
         }
     },
     SIGN_IN(){
@@ -53,8 +53,13 @@ public enum RequestedAction {
         @Override
         public void execute(Context context, JSONObject data){
 
-            // TODO: Go to space dash in activity.
             Log.d(TAG, "SPACE_DASH");
+            // Add the SpaceID to the Authentication object.
+            String spaceID = data.optString("spaceID");
+            Authentication.getInstance().setCurrentSpaceID(spaceID);
+
+            Intent i = new Intent(context, SpaceDashboard.class);
+            context.startActivity(i);
         }
     },
     REQUIRED_GENERIC_INFO() {

@@ -12,13 +12,16 @@ public class HomeRecyclerViewFragment extends RecyclerViewFragment {
         Gson gson = new Gson();
         SpaceDashContent content = gson.fromJson(data, SpaceDashContent.class);
 
+        itemSorter.clear();
+        mContentItems.clear();
+
         for(AnnouncementSpaceItem announcement : content.getAnnouncementSpaceItems()){
             itemSorter.offer(announcement);
         }
         for(AdSpaceItem ad : content.getAdSpaceItems()){
             itemSorter.offer(ad);
         }
-        for(MatchedUserSpaceItem matchedUser : content.getMatchedUsers()){
+        for(MatchedUserSpaceItem matchedUser : content.getMatches()){
             itemSorter.offer(matchedUser);
         }
 

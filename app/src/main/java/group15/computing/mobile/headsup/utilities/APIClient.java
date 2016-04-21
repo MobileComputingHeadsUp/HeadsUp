@@ -1,12 +1,16 @@
 package group15.computing.mobile.headsup.utilities;
 
 import android.content.Context;
+import android.os.Looper;
 import android.preference.PreferenceActivity;
 import android.util.Log;
 
+import com.google.android.gms.auth.api.Auth;
 import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.SyncHttpClient;
 
 import org.apache.http.entity.StringEntity;
 import org.json.JSONObject;
@@ -19,7 +23,7 @@ import group15.computing.mobile.headsup.Auth.User;
  */
 public class APIClient {
     private static AsyncHttpClient client = new AsyncHttpClient();
-    private static final String API_BASE_URL = "http://389b23c3.ngrok.io/";
+    private static final String API_BASE_URL = "http://c0d3cd49.ngrok.io/";
 
     public static void get(String url, JsonHttpResponseHandler responseHandler){
         client.get(API_BASE_URL + url, responseHandler);
@@ -45,6 +49,21 @@ public class APIClient {
 
         // Make the request
         client.post(API_BASE_URL + "api/beacons/hit_beacon", params, responseHandler);
+    }
+
+    public static void leaveSpace(JsonHttpResponseHandler responseHandler){
+        // Get the current user and space_id.
+        Authentication auth = Authentication.getInstance();
+        String currentUserID = auth.getCurrentUser().getId();
+        String spaceID = auth.getCurrentSpaceID();
+
+        // Add the data to the request.
+        RequestParams params = new RequestParams();
+        params.put("google_id", currentUserID);
+        params.put("space_id", spaceID);
+
+        // Make the request.
+        client.post(API_BASE_URL + "api/spaces/leave", params, responseHandler);
     }
 
     public static void addSpaceProfile(String spaceProfile, JsonHttpResponseHandler responseHandler){
@@ -78,5 +97,22 @@ public class APIClient {
 
         // Make the request.
         client.post(API_BASE_URL + "api/users/generic/info", params, responseHandler);
+    }
+
+    public static void requestSpaceDashFeed(String beacons,  JsonHttpResponseHandler responseHandler){
+
+        // Get the current user and space_id.
+        Authentication auth = Authentication.getInstance();
+        String currentUserID = auth.getCurrentUser().getId();
+        String spaceID = auth.getCurrentSpaceID();
+
+        // Add the datat to the request.
+        RequestParams params = new RequestParams();
+        params.put("google_id", currentUserID);
+        params.put("space_id", spaceID);
+        params.put("beacons", beacons);
+
+        // Make the request.
+        client.post(API_BASE_URL + "api/spaces/dash", params, responseHandler);
     }
 }

@@ -1,0 +1,122 @@
+{
+  "ads": [
+    {
+      "title": "Nope not with a beacon",
+      "description": "nidwnd",
+      "imgUrl": "http://static.tumblr.com/lbtm3t2/8PAn0kziu/mongodb-logo.png",
+      "link": "",
+      "_id": "57181b7ff9b8d3d64e73ca4c",
+      "timestamp": 1461211655543
+    },
+    {
+      "title": "not with a beacon",
+      "description": "dw",
+      "imgUrl": "dwd",
+      "link": "dw",
+      "_id": "57181e178b9aea5a5218f4fe",
+      "timestamp": 1461211655543
+    },
+    {
+      "title": "TIME STAAAAAAAAAAAAAAAAAAAAAAAMP",
+      "description": "HII",
+      "imgUrl": "NO IM THO",
+      "link": "",
+      "_id": "57185215e98ec4e55c8efd57",
+      "timestamp": 1461211669884
+    },
+    {
+      "title": "This one is with a beacon",
+      "description": "it also has an image",
+      "imgUrl": "http://static.tumblr.com/lbtm3t2/8PAn0kziu/mongodb-logo.png",
+      "link": "",
+      "_id": "57181b3af9b8d3d64e73ca4b",
+      "timestamp": 1461211655542
+    }
+  ],
+  "announcments": [
+    {
+      "text": "anoth 1",
+      "_id": "57181dee8b9aea5a5218f4fb",
+      "timestamp": 1461198318302
+    },
+    {
+      "text": "iiiii",
+      "_id": "57181df28b9aea5a5218f4fc",
+      "timestamp": 1461198322498
+    },
+    {
+      "text": "Hey guys, theres a new announcment!!!",
+      "_id": "571836dcd7bd5ca658b51a27",
+      "timestamp": 1461204700037
+    },
+    {
+      "text": "You're basic",
+      "_id": "571836e1d7bd5ca658b51a28",
+      "timestamp": 1461204705218
+    },
+    {
+      "text": "Welcome to my cool space",
+      "_id": "571836e8d7bd5ca658b51a29",
+      "timestamp": 1461204712292
+    },
+    {
+      "text": "UMMMMMMMMMMM",
+      "_id": "571836ecd7bd5ca658b51a2a",
+      "timestamp": 1461204716858
+    }
+  ],
+  "matches": [
+    {
+      "user": {
+        "name": "Sergio Puleri",
+        "pictureUrl": "https://lh3.googleusercontent.com/-IwaN3JUE6EU/AAAAAAAAAAI/AAAAAAAACf8/ktgz9SmfTn4/photo.jpg?sz=50",
+        "age": null
+      },
+      "matchedAttributes": [
+        {
+          "Do you like pastries?": [
+            "yes"
+          ]
+        },
+        {
+          "Which bagel options do you like?": [
+            "Cinnamon Crunch"
+          ]
+        },
+        {
+          "Why do you come to Panera?": [
+            "Eat and conversate"
+          ]
+        },
+        {
+          "What do you like most about panera?": [
+            "the",
+            "chillness"
+          ]
+        }
+      ],
+      "timestamp": 1461205784999
+    }
+  ],
+  "users": [
+    {
+      "name": "Sergio Puleri",
+      "pictureUrl": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=50",
+      "bio": "hi im sergio!!!!!!!!!!!!",
+      "gender": "male",
+      "age": 20,
+      "timestamp": 1461205781870
+    },
+    {
+      "name": "Sergio Puleri",
+      "pictureUrl": "https://lh3.googleusercontent.com/-IwaN3JUE6EU/AAAAAAAAAAI/AAAAAAAACf8/ktgz9SmfTn4/photo.jpg?sz=50",
+      "age": null,
+      "timestamp": 1461205784937
+    }
+  ],
+  "space": {
+    "name": "Panera",
+    "description": "good food",
+    "id": "57164cde112cb50928f395fd"
+  }
+}

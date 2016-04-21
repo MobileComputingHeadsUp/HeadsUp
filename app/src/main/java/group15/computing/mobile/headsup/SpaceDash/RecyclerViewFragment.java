@@ -3,11 +3,13 @@ package group15.computing.mobile.headsup.SpaceDash;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.github.florent37.materialviewpager.adapter.RecyclerViewMaterialAdapter;
@@ -22,21 +24,22 @@ import group15.computing.mobile.headsup.Forms.SpaceProfile;
 import group15.computing.mobile.headsup.R;
 import group15.computing.mobile.headsup.SpaceDash.RecyclerViewAdapter;
 import group15.computing.mobile.headsup.SpaceDash.SpaceItem;
+import group15.computing.mobile.headsup.activities.MainActivity;
 import group15.computing.mobile.headsup.activities.SpaceDashboard;
 
 public abstract class RecyclerViewFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private String data;
+    private SpaceDashboard parentActivity;
+    private SwipeRefreshLayout swipeContainer;
 
     protected List<SpaceItem> mContentItems = new ArrayList<>();
     protected PriorityQueue<SpaceItem> itemSorter = new PriorityQueue<>(5, new SpaceItemComparator());
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        this.data = getArguments().getString(SpaceDashboard.DATA);
+
         return inflater.inflate(R.layout.fragment_recycler_view, container, false);
     }
 
@@ -51,12 +54,37 @@ public abstract class RecyclerViewFragment extends Fragment {
         mAdapter = new RecyclerViewMaterialAdapter(new RecyclerViewAdapter(mContentItems));
         mRecyclerView.setAdapter(mAdapter);
 
-        // Generate the content!
-        generateContentFromJson(this.data);
-        mAdapter.notifyDataSetChanged();
-
         MaterialViewPagerHelper.registerRecyclerView(getActivity(), mRecyclerView, null);
+
+        // Setup the swipe refresh cointainer
+        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                parentActivity.initFeedRefresh();
+            }
+        });
+
+        swipeContainer.setColorSchemeResources(R.color.primary);
     }
 
     public abstract void generateContentFromJson(String data);
+
+    public void refreshContent(String data){
+
+        // Generate content.
+        generateContentFromJson(data);
+        swipeContainer.setRefreshing(false);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    public void setParentActivity(SpaceDashboard parentActivity){
+        this.parentActivity = parentActivity;
+    }
+
+    public void startLoadingIcon(){
+        if(swipeContainer!=null)
+            swipeContainer.setRefreshing(true);
+    }
 }

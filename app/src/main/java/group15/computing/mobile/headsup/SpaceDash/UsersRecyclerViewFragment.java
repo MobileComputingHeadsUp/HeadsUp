@@ -14,10 +14,13 @@ public class UsersRecyclerViewFragment extends RecyclerViewFragment {
         Gson gson = new Gson();
         SpaceDashContent content = gson.fromJson(data, SpaceDashContent.class);
 
+        itemSorter.clear();
+        mContentItems.clear();
+
         for(UserSpaceItem user : content.getUserSpaceItems()){
             itemSorter.offer(user);
         }
-        for(MatchedUserSpaceItem matchedUser : content.getMatchedUsers()){
+        for(MatchedUserSpaceItem matchedUser : content.getMatches()){
             itemSorter.offer(matchedUser);
         }
 
