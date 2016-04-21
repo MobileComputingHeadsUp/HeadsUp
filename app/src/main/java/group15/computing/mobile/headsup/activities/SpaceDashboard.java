@@ -295,4 +295,10 @@ public class SpaceDashboard extends AppCompatActivity {
 //            }
 //        });
     }
+
+    // Stop the user from going back after entering a space.
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
 }
