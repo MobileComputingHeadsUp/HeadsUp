@@ -220,7 +220,7 @@ public class SpaceDashboard extends AppCompatActivity {
                 SpaceDashContent content = gson.fromJson(feedData, SpaceDashContent.class);
 
                 // Set the title.
-                headerLogo.setText(content.getSpace_name());
+                headerLogo.setText(content.getSpace().getName());
             }
         });
     }
@@ -298,7 +298,7 @@ public class SpaceDashboard extends AppCompatActivity {
 
     private void requestFeedData(String beaconArray){
 
-        final String feedData = Utilities.loadJSONFromAsset("dummy_space_feed.json", SpaceDashboard.this);
+        final String feedData = Utilities.loadJSONFromAsset("new_dummy_space_feed.json", SpaceDashboard.this);
         refreshFeed(feedData);
 //        APIClient.requestSpaceDashFeed(beaconArray, new JsonHttpResponseHandler(){
 //            @Override

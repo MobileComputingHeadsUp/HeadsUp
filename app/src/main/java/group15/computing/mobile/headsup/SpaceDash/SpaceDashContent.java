@@ -9,27 +9,27 @@ import group15.computing.mobile.headsup.Auth.User;
  */
 public class SpaceDashContent {
 
-    private String space_name;
+    private Space space;
     private ArrayList<AdSpaceItem> ads;
-    private ArrayList<AnnouncementSpaceItem> announcements;
+    private ArrayList<AnnouncementSpaceItem> announcments; // Sergio made me do this
     private ArrayList<UserSpaceItem> users;
-    private ArrayList<MatchedUserSpaceItem> matchedUsers;
+    private ArrayList<MatchedUserSpaceItem> matches;
 
 
-    public String getSpace_name() {
-        return space_name;
+    public Space getSpace() {
+        return space;
     }
 
-    public void setSpace_name(String space_name) {
-        this.space_name = space_name;
+    public void setSpace(Space space) {
+        this.space = space;
     }
 
-    public ArrayList<MatchedUserSpaceItem> getMatchedUsers() {
-        return matchedUsers;
+    public ArrayList<MatchedUserSpaceItem> getMatches() {
+        return matches;
     }
 
-    public void setMatchedUsers(ArrayList<MatchedUserSpaceItem> matchedUsers) {
-        this.matchedUsers = matchedUsers;
+    public void setMatches(ArrayList<MatchedUserSpaceItem> matches) {
+        this.matches = matches;
     }
 
     public ArrayList<AdSpaceItem> getAdSpaceItems() {
@@ -41,11 +41,11 @@ public class SpaceDashContent {
     }
 
     public ArrayList<AnnouncementSpaceItem> getAnnouncementSpaceItems() {
-        return announcements;
+        return announcments;
     }
 
     public void setAnnouncementSpaceItems(ArrayList<AnnouncementSpaceItem> announcements) {
-        this.announcements = announcements;
+        this.announcments = announcements;
     }
 
     public ArrayList<UserSpaceItem> getUserSpaceItems() {

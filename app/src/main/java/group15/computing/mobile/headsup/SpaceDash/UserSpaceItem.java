@@ -56,15 +56,18 @@ public class UserSpaceItem extends SpaceItem{
             name.setText(this.name);
         }
         if(bio!=null){
-            bio.setText("Bio: " + this.bio);
+            String text = this.bio != null ? this.bio : "not given";
+            bio.setText("Bio: " + text);
         }
         if(gender!=null){
-            gender.setText("Gender: " + this.gender);
+            String text = this.gender != null ? this.gender : "not given";
+            gender.setText("Gender: " + text);
         }
         if(age!=null){
-            age.setText("Age: " + this.age);
+            String text = this.age != null ? this.age : "not given";
+            age.setText("Age: " + text);
         }
-        if(picture!=null && this.pictureUrl.length()>0){
+        if(picture!=null && this.pictureUrl!=null && this.pictureUrl.length()>0){
             Picasso.with(context).load(this.pictureUrl).into(picture);
         }
     }

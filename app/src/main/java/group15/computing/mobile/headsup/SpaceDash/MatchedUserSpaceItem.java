@@ -27,24 +27,12 @@ import group15.computing.mobile.headsup.R;
  */
 public class MatchedUserSpaceItem extends SpaceItem{
     private UserSpaceItem user;
-    private Attributes matchedAttributes;
+    private ArrayList<HashMap<String, String[]>> matchedAttributes;
 
-    static class Attributes{
-        protected HashMap<String, String> dropdowns;
-        protected HashMap<String, String[]> checkAllThatApplies;
-        protected HashMap<String, String> freeResponses;
-
-        public Attributes() {
-            this.dropdowns = new HashMap<>();
-            this.checkAllThatApplies = new HashMap<>();
-            this.freeResponses = new HashMap<>();
-        }
-    }
-
-    public MatchedUserSpaceItem(long timestamp, String name, String pictureUrl, String bio, String gender, String age, Attributes matchedProfileAttributes){
+    public MatchedUserSpaceItem(long timestamp, String name, String pictureUrl, String bio, String gender, String age,  ArrayList<HashMap<String, String[]>> matchedAttributes){
         super(timestamp);
         user = new UserSpaceItem(timestamp, name, pictureUrl, bio, gender, age);
-        this.matchedAttributes = matchedProfileAttributes;
+        this.matchedAttributes = matchedAttributes;
     }
 
     @Override
@@ -88,69 +76,33 @@ public class MatchedUserSpaceItem extends SpaceItem{
         // Add the matched attributes.
         LinearLayout matchedAttrsContainer = (LinearLayout) convertView.findViewById(R.id.matched_attrs_container);
 
-        addDropdownResponses(convertView, matchedAttrsContainer);
-        addCheckAllThatApplies(convertView, matchedAttrsContainer);
-        addFreeResponses(convertView, matchedAttrsContainer);
-    }
 
-    private void addDropdownResponses(View convertView, LinearLayout matchedAttrsContainer){
+        for(HashMap<String, String[]> map : matchedAttributes){
+            for(String question : map.keySet()){
 
-        HashMap<String, String> dropdowns = matchedAttributes.dropdowns;
-        for(String question : dropdowns.keySet()){
+                // Create a the view for each dropdown and extract the textview from it.
+                View matchItemView = LayoutInflater.from(convertView.getContext()).inflate(R.layout.matched_attributes, null);
+                TextView matchItem = (TextView)matchItemView.findViewById(R.id.text);
 
-            // Create a the view for each dropdown and extract the textview from it.
-            View matchItemView = LayoutInflater.from(convertView.getContext()).inflate(R.layout.matched_attributes, null);
-            TextView matchItem = (TextView)matchItemView.findViewById(R.id.text);
+                // Set the text
+                String matchString = "<b>" + question + "</b>&nbsp;&nbsp;";
+                String[] responses = map.get(question);
 
-            // Set the text and add to the view
-            String matchString = "<b>" + question + "</b>&nbsp;&nbsp;" + dropdowns.get(question);
-            matchItem.setText(Html.fromHtml(matchString));
-            matchedAttrsContainer.addView(matchItem);
-        }
-    }
+                // Add all the responses to the string.
+                for(int i = 0; i < responses.length; i++){
+                    matchString += responses[i];
 
-    private void addCheckAllThatApplies(View convertView, LinearLayout matchedAttrsContainer){
-
-        HashMap<String, String[]> checkAllThatApplies = matchedAttributes.checkAllThatApplies;
-        for(String question : checkAllThatApplies.keySet()){
-
-            // Create a the view for each dropdown and extract the textview from it.
-            View matchItemView = LayoutInflater.from(convertView.getContext()).inflate(R.layout.matched_attributes, null);
-            TextView matchItem = (TextView)matchItemView.findViewById(R.id.text);
-
-            // Set the text
-            String matchString = "<b>" + question + "</b>&nbsp;&nbsp;";
-            String[] responses = checkAllThatApplies.get(question);
-
-            // Add all the responses to the string.
-            for(int i = 0; i < responses.length; i++){
-                matchString += responses[i];
-
-                if(i < responses.length - 1){
-                    matchString += ", ";
+                    if(i < responses.length - 1){
+                        matchString += ", ";
+                    }
                 }
+
+                matchItem.setText(Html.fromHtml(matchString));
+                matchedAttrsContainer.addView(matchItem);
             }
-
-            matchItem.setText(Html.fromHtml(matchString));
-            matchedAttrsContainer.addView(matchItem);
         }
     }
 
-    private void addFreeResponses(View convertView, LinearLayout matchedAttrsContainer){
-
-        HashMap<String, String> freeResponses = matchedAttributes.freeResponses;
-        for(String question : freeResponses.keySet()){
-
-            // Create a the view for each dropdown and extract the textview from it.
-            View matchItemView = LayoutInflater.from(convertView.getContext()).inflate(R.layout.matched_attributes, null);
-            TextView matchItem = (TextView)matchItemView.findViewById(R.id.text);
-
-            // Set the text and add to the view
-            String matchString = "<b>" + question + "</b>&nbsp;&nbsp;" + freeResponses.get(question);
-            matchItem.setText(Html.fromHtml(matchString));
-            matchedAttrsContainer.addView(matchItem);
-        }
-    }
 
     // Animation stuff.
     void expand(final View v) {

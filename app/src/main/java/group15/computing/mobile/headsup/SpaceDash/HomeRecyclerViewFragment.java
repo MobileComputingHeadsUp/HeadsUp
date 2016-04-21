@@ -21,7 +21,7 @@ public class HomeRecyclerViewFragment extends RecyclerViewFragment {
         for(AdSpaceItem ad : content.getAdSpaceItems()){
             itemSorter.offer(ad);
         }
-        for(MatchedUserSpaceItem matchedUser : content.getMatchedUsers()){
+        for(MatchedUserSpaceItem matchedUser : content.getMatches()){
             itemSorter.offer(matchedUser);
         }
 

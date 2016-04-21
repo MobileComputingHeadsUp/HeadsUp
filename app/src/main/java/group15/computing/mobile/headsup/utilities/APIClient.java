@@ -60,7 +60,7 @@ public class APIClient {
         params.put("space_id", spaceID);
 
         // Make the request.
-        client.post(API_BASE_URL + "api/space/leave", params, responseHandler);
+        client.post(API_BASE_URL + "api/spaces/leave", params, responseHandler);
     }
 
     public static void addSpaceProfile(String spaceProfile, JsonHttpResponseHandler responseHandler){
