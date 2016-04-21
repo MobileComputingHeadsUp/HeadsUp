@@ -67,7 +67,7 @@ public class LeaveSpaceDialogFragment extends DialogFragment {
             public void run() {
                 leaveSpace();
             }
-        }, 5000); // TODO: Make this delay longer after testing.
+        }, 7000); // TODO: Make this delay longer after testing.
 
         // Create the AlertDialog object and return it
         return builder.create();
@@ -77,35 +77,28 @@ public class LeaveSpaceDialogFragment extends DialogFragment {
 
         // TODO: Create the server side endpoints and test this.
         // Remove the user from the space.
-//        APIClient.leaveSpace(new JsonHttpResponseHandler(){
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//
-//                // Get the data from the response
-//                Log.d(TAG, response.toString());
-//
-//                // Remove the user from the space.
-//                Authentication.getInstance().setCurrentSpaceID("");
-//
-//                // Go back to the main activity.
-//                Intent intent = new Intent(context, MainActivity.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                context.startActivity(intent);
-//            }
-//            @Override
-//            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-//                super.onFailure(statusCode, headers, responseString, throwable);
-//                Log.d(TAG, "Failed to leave space.");
-//
-//                // TODO: HANDLE THE ERROR BETTER
-//            }
-//        });
+        APIClient.leaveSpace(new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
 
+                // Get the data from the response
+                Log.d(TAG, response.toString());
 
-        Log.d(TAG, "LEFT SPACE");
-        // Go back to the main activity.
-        Intent intent = new Intent(context, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        context.startActivity(intent);
+                // Remove the user from the space.
+                Authentication.getInstance().setCurrentSpaceID("");
+
+                // Go back to the main activity.
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                context.startActivity(intent);
+            }
+
+            @Override
+            public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Log.d(TAG, "Failed to leave space.");
+            }
+        });
     }
 }

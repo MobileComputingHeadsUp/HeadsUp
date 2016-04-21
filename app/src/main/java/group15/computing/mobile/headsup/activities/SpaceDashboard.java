@@ -200,7 +200,7 @@ public class SpaceDashboard extends AppCompatActivity {
             public void run() {
                 if(!beaconsFound){
                     stopRanging();
-                    requestFeedData("");
+                    requestFeedData("[]");
                 }
             }
         }, 8000);
@@ -315,6 +315,11 @@ public class SpaceDashboard extends AppCompatActivity {
             public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 Log.d(TAG, "Failed to retrieve data.");
+            }
+
+            @Override
+            public boolean getUseSynchronousMode() {
+                return false;
             }
         });
     }
