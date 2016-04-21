@@ -192,6 +192,9 @@ public class SpaceDashboard extends AppCompatActivity {
     public void initFeedRefresh(){
 
         beaconsFound = false;
+        home.startLoadingIcon();
+        announcements.startLoadingIcon();
+        users.startLoadingIcon();
 
         // Look for beacons real quick!
         startRanging();

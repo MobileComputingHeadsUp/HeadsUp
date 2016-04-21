@@ -63,7 +63,7 @@ public abstract class RecyclerViewFragment extends Fragment {
             }
         });
 
-        swipeContainer.setColorSchemeResources(R.color.accent, R.color.primary);
+        swipeContainer.setColorSchemeResources(R.color.primary);
     }
 
     public abstract void generateContentFromJson(String data);
@@ -78,5 +78,10 @@ public abstract class RecyclerViewFragment extends Fragment {
 
     public void setParentActivity(SpaceDashboard parentActivity){
         this.parentActivity = parentActivity;
+    }
+
+    public void startLoadingIcon(){
+        if(swipeContainer!=null)
+            swipeContainer.setRefreshing(true);
     }
 }
