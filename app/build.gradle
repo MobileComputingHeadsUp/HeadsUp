@@ -47,4 +47,5 @@ dependencies {
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
+    compile 'com.android.support:support-v4:23.1.1'
 }

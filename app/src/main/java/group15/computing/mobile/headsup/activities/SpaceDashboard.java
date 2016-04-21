@@ -55,67 +55,31 @@ public class SpaceDashboard extends AppCompatActivity {
     private BroadcastReceiver beaconBroadcastReceiver;
     private boolean beaconsFound;
 
+    HomeRecyclerViewFragment home;
+    AnnouncementsRecyclerViewFragment announcements;
+    UsersRecyclerViewFragment users;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_space_dashboard);
 
-        setupBeaconEventListener();
-    }
+        if (savedInstanceState == null) {
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+            // Setup the recycler fragments only if they have not already been created.
+            home = new HomeRecyclerViewFragment();
+            users = new UsersRecyclerViewFragment();
+            announcements = new AnnouncementsRecyclerViewFragment();
 
-        // Get the feed Data.
-        initFeedCreation();
-    }
+            // Give it a reference to this so the refresh swipers can init a refresh
+            home.setParentActivity(this);
+            users.setParentActivity(this);
+            announcements.setParentActivity(this);
+        }
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-//        mDrawerToggle.syncState();
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return mDrawerToggle.onOptionsItemSelected(item) ||
-                super.onOptionsItemSelected(item);
-    }
-
-    private void initFeedCreation(){
-
-        beaconsFound = false;
-
-        // Look for beacons real quick!
-        startRanging();
-
-        // Start a timer that will make the data request after a delay if no beacons are found. Im sure there is a more efficient way to do this.
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                if(!beaconsFound){
-                    stopRanging();
-                    requestFeedData("");
-                }
-            }
-        }, 5000);
-    }
-
-    private void createFeed(final String feedData){
-        // Convert the jsonData to a content object.
-        Gson gson = new Gson();
-        SpaceDashContent content = gson.fromJson(feedData, SpaceDashContent.class);
-
-        // Set the header text
+        // Get all the views.
         headerLogo = (TextView) findViewById(R.id.space_dash_header);
-        headerLogo.setText(content.getSpace_name());
-
-        // Get the ViewPager
         mViewPager = (MaterialViewPager) findViewById(R.id.materialViewPager);
-
-        // Get the toolbar and DrawerLayout
         toolbar = mViewPager.getToolbar();
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -142,23 +106,12 @@ public class SpaceDashboard extends AppCompatActivity {
 
             @Override
             public Fragment getItem(int position) {
-
-                // Setup fragment arguments. They need the data!
-                Bundle bundle = new Bundle();
-                bundle.putString(DATA, feedData);
-
                 switch (position % 3) {
                     case 0:
-                        HomeRecyclerViewFragment home = new HomeRecyclerViewFragment();
-                        home.setArguments(bundle);
                         return home;
                     case 1:
-                        UsersRecyclerViewFragment users = new UsersRecyclerViewFragment();
-                        users.setArguments(bundle);
                         return users;
                     default:
-                        AnnouncementsRecyclerViewFragment announcements = new AnnouncementsRecyclerViewFragment();
-                        announcements.setArguments(bundle);
                         return announcements;
                 }
             }
@@ -203,7 +156,7 @@ public class SpaceDashboard extends AppCompatActivity {
                     default:
                         return HeaderDesign.fromColorResAndUrl(
                                 R.color.primary,
-                                "http://protiumdesign.com/wp-content/uploads/2015/04/Material-Design-Background-1024.jpg");
+                                "http://apple.wallpapersfine.com/wallpapers/original/750x1334/w-41.jpg");
                 }
             }
         });
@@ -213,6 +166,67 @@ public class SpaceDashboard extends AppCompatActivity {
 
         // Sync the state!
         mDrawerToggle.syncState();
+        setupBeaconEventListener();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Get the feed Data.
+        initFeedRefresh();
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+//        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return mDrawerToggle.onOptionsItemSelected(item) ||
+                super.onOptionsItemSelected(item);
+    }
+
+    public void initFeedRefresh(){
+
+        beaconsFound = false;
+
+        // Look for beacons real quick!
+        startRanging();
+
+        // Start a timer that will make the data request after a delay if no beacons are found. Im sure there is a more efficient way to do this.
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if(!beaconsFound){
+                    stopRanging();
+                    requestFeedData("");
+                }
+            }
+        }, 5000);
+    }
+
+    private void refreshFeed(final String feedData){
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                //  Update the fragments
+                home.refreshContent(feedData);
+                users.refreshContent(feedData);
+                announcements.refreshContent(feedData);
+
+                // Convert the jsonData to a content object.
+                Gson gson = new Gson();
+                SpaceDashContent content = gson.fromJson(feedData, SpaceDashContent.class);
+
+                // Set the title.
+                headerLogo.setText(content.getSpace_name());
+            }
+        });
     }
 
     private void startRanging(){
@@ -267,18 +281,18 @@ public class SpaceDashboard extends AppCompatActivity {
 
     private void requestFeedData(String beaconArray){
 //
-//        final String feedData = Utilities.loadJSONFromAsset("dummy_space_feed.json", SpaceDashboard.this);
-//        createFeed(feedData);
-        APIClient.requestSpaceDashFeed(beaconArray, new JsonHttpResponseHandler(){
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                createFeed(response.toString());
-            }
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
-                Log.d(TAG, "Failed to retrieve data.");
-            }
-        });
+        final String feedData = Utilities.loadJSONFromAsset("dummy_space_feed.json", SpaceDashboard.this);
+        refreshFeed(feedData);
+//        APIClient.requestSpaceDashFeed(beaconArray, new JsonHttpResponseHandler(){
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                refreshFeed(response.toString());
+//            }
+//            @Override
+//            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+//                super.onFailure(statusCode, headers, responseString, throwable);
+//                Log.d(TAG, "Failed to retrieve data.");
+//            }
+//        });
     }
 }

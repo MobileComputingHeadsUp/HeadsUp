@@ -14,6 +14,9 @@ public class UsersRecyclerViewFragment extends RecyclerViewFragment {
         Gson gson = new Gson();
         SpaceDashContent content = gson.fromJson(data, SpaceDashContent.class);
 
+        itemSorter.clear();
+        mContentItems.clear();
+
         for(UserSpaceItem user : content.getUserSpaceItems()){
             itemSorter.offer(user);
         }
