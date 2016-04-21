@@ -12,6 +12,7 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
+import group15.computing.mobile.headsup.activities.GenericUserInfoFormActivity;
 import group15.computing.mobile.headsup.activities.ProfileFormActivity;
 import group15.computing.mobile.headsup.utilities.Constants;
 
@@ -54,6 +55,14 @@ public enum RequestedAction {
 
             // TODO: Go to space dash in activity.
             Log.d(TAG, "SPACE_DASH");
+        }
+    },
+    REQUIRED_GENERIC_INFO() {
+        @Override
+        public void execute(Context context, JSONObject data) {
+            Log.d(TAG, "REQUIRED_GENERIC_INFO");
+            Intent i = new Intent(context, GenericUserInfoFormActivity.class);
+            context.startActivity(i);
         }
     };
 

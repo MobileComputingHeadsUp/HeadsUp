@@ -1,6 +1,7 @@
 package group15.computing.mobile.headsup.activities;
 
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -114,8 +115,12 @@ public class GenericUserInfoFormActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 // Get the data from the response
                 Log.d(TAG, response.toString());
-                makeToast("Generic User Info Saved");
-                // TODO: GO TO SPACE DASH
+                makeToast("User Info Saved");
+
+                // Go back to the main activity.
+                Intent intent = new Intent(GenericUserInfoFormActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
 
             @Override

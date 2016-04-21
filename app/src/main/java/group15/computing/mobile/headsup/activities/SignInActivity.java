@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.test.SingleLaunchActivityTestCase;
 import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +29,7 @@ import org.json.JSONObject;
 import group15.computing.mobile.headsup.Auth.Authentication;
 import group15.computing.mobile.headsup.Auth.User;
 import group15.computing.mobile.headsup.R;
+import group15.computing.mobile.headsup.beacon_detection.RequestedAction;
 import group15.computing.mobile.headsup.utilities.APIClient;
 import group15.computing.mobile.headsup.utilities.Constants;
 
@@ -126,12 +128,27 @@ public class SignInActivity extends FragmentActivity implements GoogleApiClient.
                         returnFailure();
                     }
 
+                    JSONObject userRes = null;
+                    try {
+                        // Get the user from the response
+                        userRes = response.getJSONObject("user");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                     // Construct the user object with the JSON response and google account.
-                    User user = new User(response, acct);
+                    User user = new User(userRes, acct);
                     Authentication.getInstance().userSignedIn(user);
 
                     Log.d(TAG, "Logged In");
                     makeToast("Welcome " + acct.getDisplayName());
+
+                    // Get the data from the response
+                    String requestedAction = response.optString("action");
+                    Log.d(TAG, "THE ACTION IS " + requestedAction);
+                    RequestedAction action = RequestedAction.valueOf(requestedAction);
+                    action.execute(SignInActivity.this, response);
+
                     returnSuccess();
                 }
 

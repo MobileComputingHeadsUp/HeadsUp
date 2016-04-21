@@ -64,11 +64,12 @@ public class APIClient {
     public static void addGenericUserInfo(String userInfo, JsonHttpResponseHandler responseHandler) {
         // Get the current user.
         User currentUser = Authentication.getInstance().getCurrentUser();
-
-        String google_id = "105979492405500560976";
-        if (currentUser != null) {
-            google_id = currentUser.getId();
-        }
+        String google_id = currentUser.getId();
+//
+//        String google_id = "105979492405500560976";
+//        if (currentUser != null) {
+//            google_id = currentUser.getId();
+//        }
 
         // Add the data to the request.
         RequestParams params = new RequestParams();
