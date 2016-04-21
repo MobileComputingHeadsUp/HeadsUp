@@ -23,7 +23,6 @@ import group15.computing.mobile.headsup.Auth.User;
  */
 public class APIClient {
     private static AsyncHttpClient client = new AsyncHttpClient();
-
     private static final String API_BASE_URL = "http://c0d3cd49.ngrok.io/";
 
     public static void get(String url, JsonHttpResponseHandler responseHandler){
@@ -79,6 +78,25 @@ public class APIClient {
 
         // Make the request.
         client.post(API_BASE_URL + "api/users/space_profile", params, responseHandler);
+    }
+
+    public static void addGenericUserInfo(String userInfo, JsonHttpResponseHandler responseHandler) {
+        // Get the current user.
+        User currentUser = Authentication.getInstance().getCurrentUser();
+        String google_id = currentUser.getId();
+//
+//        String google_id = "105979492405500560976";
+//        if (currentUser != null) {
+//            google_id = currentUser.getId();
+//        }
+
+        // Add the data to the request.
+        RequestParams params = new RequestParams();
+        params.put("google_id", google_id);
+        params.put("info", userInfo);
+
+        // Make the request.
+        client.post(API_BASE_URL + "api/users/generic/info", params, responseHandler);
     }
 
     public static void requestSpaceDashFeed(String beacons,  JsonHttpResponseHandler responseHandler){

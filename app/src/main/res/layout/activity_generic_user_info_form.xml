@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="group15.computing.mobile.headsup.activities.GenericUserInfoFormActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:id="@+id/header"
+        android:text="Please fill out the following information"
+        android:gravity="center"
+        android:textSize="14dp"
+        android:background="@color/accent"/>
+
+    <!-- GENDER INFO -->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/genderLabel"
+        android:layout_below="@id/header"
+        android:text="Gender"
+        android:textSize="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"/>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/genderGroup"
+        android:layout_below="@+id/genderLabel"
+        android:orientation="horizontal"
+        android:layout_marginStart="8dp">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Male"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Female"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Other"/>
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bioLabel"
+        android:layout_below="@id/genderGroup"
+        android:text="Short Bio"
+        android:textSize="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"/>
+
+    <EditText
+    android:id="@+id/editText"
+    android:layout_below="@+id/bioLabel"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:inputType="textMultiLine"
+    android:cursorVisible="true"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
+    android:textSize="12dp" android:layout_marginStart="8dp"
+    android:maxLength="200"/>
+
+    <!--<com.rengwuxian.materialedittext.MaterialEditText-->
+        <!--android:id="@+id/editText"-->
+        <!--android:layout_below="@+id/bioLabel"-->
+        <!--app:met_baseColor="@color/primary_text"-->
+        <!--app:met_textColorHint="@color/secondary_text"-->
+        <!--app:met_primaryColor="@color/accent"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:met_floatingLabel="normal"-->
+        <!--android:inputType="textMultiLine"-->
+        <!--android:cursorVisible="true"-->
+        <!--android:focusableInTouchMode="true"-->
+        <!--android:focusable="true"-->
+        <!--android:textSize="12dp"-->
+        <!--android:maxLength="200"/>-->
+
+    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/birthdayLabel"
+    android:layout_below="@id/editText"
+    android:text="Birthday"
+    android:textSize="16dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginStart="8dp"/>
+
+    <!-- this label will become visible upon selcting bday -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/actualBirthday"
+        android:layout_below="@id/birthdayLabel"
+        android:text="Birthday goes here"
+        android:textSize="16dp"
+        android:textColor="@color/primary_text"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:visibility="invisible"/>
+
+    <!-- button will go invisible when birthday is sekected -->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/birthdayLabel"
+        android:id="@+id/chooseDate"
+        android:layout_marginStart="8dp"
+        android:text="Choose"
+        android:onClick="onChooseBirthdayClicked"/>
+
+    <!-- SUBMIT -->
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/submit"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:text="Submit"
+        android:background="@color/accent"
+        android:layout_marginBottom="16dp"
+        android:onClick="onSubmitButtonClicked"/>
+
+</RelativeLayout>

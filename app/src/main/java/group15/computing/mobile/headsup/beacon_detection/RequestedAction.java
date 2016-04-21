@@ -12,6 +12,7 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
+import group15.computing.mobile.headsup.activities.GenericUserInfoFormActivity;
 import group15.computing.mobile.headsup.Auth.Authentication;
 import group15.computing.mobile.headsup.activities.ProfileFormActivity;
 import group15.computing.mobile.headsup.activities.SpaceDashboard;
@@ -58,6 +59,14 @@ public enum RequestedAction {
             Authentication.getInstance().setCurrentSpaceID(spaceID);
 
             Intent i = new Intent(context, SpaceDashboard.class);
+            context.startActivity(i);
+        }
+    },
+    REQUIRED_GENERIC_INFO() {
+        @Override
+        public void execute(Context context, JSONObject data) {
+            Log.d(TAG, "REQUIRED_GENERIC_INFO");
+            Intent i = new Intent(context, GenericUserInfoFormActivity.class);
             context.startActivity(i);
         }
     };
