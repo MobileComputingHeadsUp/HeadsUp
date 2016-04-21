@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
 import com.google.gson.Gson;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.altbeacon.beacon.BeaconManager;
@@ -202,7 +203,7 @@ public class SpaceDashboard extends AppCompatActivity {
                     requestFeedData("");
                 }
             }
-        }, 5000);
+        }, 8000);
     }
 
     private void refreshFeed(final String feedData){
@@ -221,6 +222,8 @@ public class SpaceDashboard extends AppCompatActivity {
 
                 // Set the title.
                 headerLogo.setText(content.getSpace().getName());
+
+                mDrawerToggle.syncState();
             }
         });
     }
@@ -298,19 +301,22 @@ public class SpaceDashboard extends AppCompatActivity {
 
     private void requestFeedData(String beaconArray){
 
-        final String feedData = Utilities.loadJSONFromAsset("new_dummy_space_feed.json", SpaceDashboard.this);
-        refreshFeed(feedData);
-//        APIClient.requestSpaceDashFeed(beaconArray, new JsonHttpResponseHandler(){
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                refreshFeed(response.toString());
-//            }
-//            @Override
-//            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-//                super.onFailure(statusCode, headers, responseString, throwable);
-//                Log.d(TAG, "Failed to retrieve data.");
-//            }
-//        });
+//        final String feedData = Utilities.loadJSONFromAsset("new_dummy_space_feed.json", SpaceDashboard.this);
+//        refreshFeed(feedData);
+
+        APIClient.requestSpaceDashFeed(beaconArray, new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                refreshFeed(response.toString());
+            }
+
+            @Override
+            public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Log.d(TAG, "Failed to retrieve data.");
+            }
+        });
     }
 
     // Stop the user from going back after entering a space.

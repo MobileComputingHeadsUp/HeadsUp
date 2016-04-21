@@ -8,6 +8,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.Header;
@@ -179,7 +180,8 @@ public class ProfileFormActivity extends AppCompatActivity {
         // Save to server
         APIClient.addSpaceProfile(spaceProfileJson, new JsonHttpResponseHandler(){
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+            public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
                 // Get the data from the response
                 Log.d(TAG, response.toString());
                 makeToast("Profile Created!");
@@ -188,13 +190,12 @@ public class ProfileFormActivity extends AppCompatActivity {
                 RequestedAction action = RequestedAction.valueOf(requestedAction);
                 action.execute(ProfileFormActivity.this, response);
             }
+
             @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
+            public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
                 Log.d(TAG, "Failed to retrieve data.");
                 makeToast("Ooops an Error Occurred.");
-
-                // TODO: HANDLE THE ERROR BETTER LOL
             }
         });
 

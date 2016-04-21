@@ -18,6 +18,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallbacks;
 import com.google.android.gms.common.api.Status;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.Header;
@@ -53,10 +54,6 @@ public class SignInActivity extends FragmentActivity implements GoogleApiClient.
                 .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
-
-
-//        Button signOutButton = (Button) findViewById(R.id.sign_out_button);
-//        signOutButton.setOnClickListener(this);
 
         // Start the sign in intent.
         signIn();
@@ -119,9 +116,10 @@ public class SignInActivity extends FragmentActivity implements GoogleApiClient.
 
             // Authenticate with the server.
             String idToken = acct.getIdToken();
-            APIClient.signInUser(idToken, new JsonHttpResponseHandler() {
+            APIClient.signInUser(idToken, new JsonHttpResponseHandler(){
                 @Override
-                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, JSONObject response) {
+                    super.onSuccess(statusCode, headers, response);
                     if (statusCode == 500 || statusCode == 403) {
                         returnFailure();
                     }
@@ -136,9 +134,10 @@ public class SignInActivity extends FragmentActivity implements GoogleApiClient.
                 }
 
                 @Override
-                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                    super.onFailure(statusCode, headers, responseString, throwable);
-                    returnFailure();
+                public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                    super.onFailure(statusCode, headers, throwable, errorResponse);
+                                        returnFailure();
+
                 }
             });
         }else{

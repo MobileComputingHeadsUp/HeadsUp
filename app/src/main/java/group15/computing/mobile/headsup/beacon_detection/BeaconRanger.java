@@ -35,7 +35,7 @@ public class BeaconRanger extends Observable implements RangeNotifier {
 
                 // Display the message to the user and log it.
                 String message = "Found a beacon transmitting the UID: " + uid + " approx " + distance + " meters away.";
-                Log.d(TAG, message);
+                Log.i(TAG, message);
 
                 BeaconEvent event = BeaconEvent.FOUND_UID;
                 event.attachStringData(uid.toString());
@@ -43,13 +43,15 @@ public class BeaconRanger extends Observable implements RangeNotifier {
                 setChanged();
                 notifyObservers(event);
 
-                beaconIDs.add(uid.toString());
+                beaconIDs.add(uid.toString().split("x")[1].toUpperCase());
             }
         }
 
         // Create a json string with all the beacon ids.
         Gson gson = new Gson();
         String beaconIDsString = gson.toJson(beaconIDs);
+
+        Log.i(TAG, beaconIDsString);
 
         BeaconEvent event = BeaconEvent.BEACONS_FOUND;
         event.attachStringData(beaconIDsString);

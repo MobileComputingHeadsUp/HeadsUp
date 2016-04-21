@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.github.florent37.materialviewpager.adapter.RecyclerViewMaterialAdapter;
@@ -23,6 +24,7 @@ import group15.computing.mobile.headsup.Forms.SpaceProfile;
 import group15.computing.mobile.headsup.R;
 import group15.computing.mobile.headsup.SpaceDash.RecyclerViewAdapter;
 import group15.computing.mobile.headsup.SpaceDash.SpaceItem;
+import group15.computing.mobile.headsup.activities.MainActivity;
 import group15.computing.mobile.headsup.activities.SpaceDashboard;
 
 public abstract class RecyclerViewFragment extends Fragment {
@@ -72,8 +74,9 @@ public abstract class RecyclerViewFragment extends Fragment {
 
         // Generate content.
         generateContentFromJson(data);
-        mAdapter.notifyDataSetChanged();
         swipeContainer.setRefreshing(false);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
     }
 
     public void setParentActivity(SpaceDashboard parentActivity){
