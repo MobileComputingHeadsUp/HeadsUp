@@ -9,14 +9,14 @@ import java.util.HashMap;
 public class SpaceProfile {
 
     static class Data{
-        protected HashMap<String, String> dropdowns;
-        protected HashMap<String, String[]> checkAllThatApplies;
-        protected HashMap<String, String> freeResponses;
+        protected ArrayList<HashMap<String, String>> dropdowns;
+        protected ArrayList<HashMap<String, String[]>> checkAllThatApplies;
+        protected ArrayList<HashMap<String, String>> freeResponses;
 
         public Data() {
-            this.dropdowns = new HashMap<>();
-            this.checkAllThatApplies = new HashMap<>();
-            this.freeResponses = new HashMap<>();
+            this.dropdowns = new ArrayList<>();
+            this.checkAllThatApplies = new ArrayList<>();
+            this.freeResponses = new ArrayList<>();
         }
     }
 
@@ -31,30 +31,36 @@ public class SpaceProfile {
     }
 
     public void addDropdown(String key, String value){
-        data.dropdowns.put(key, value);
+        HashMap<String, String> item = new HashMap<>();
+        item.put(key, value);
+        data.dropdowns.add(item);
     }
 
     public void addCheck(String key, String[] value){
-        data.checkAllThatApplies.put(key, value);
+        HashMap<String, String[]> item = new HashMap<>();
+        item.put(key, value);
+        data.checkAllThatApplies.add(item);
     }
 
     public void addFreeResponse(String key, String value){
-        data.freeResponses.put(key, value);
+        HashMap<String, String> item = new HashMap<>();
+        item.put(key, value);
+        data.freeResponses.add(item);
     }
 
     public void clearData(){
         this.data = new Data();
     }
 
-    public HashMap<String, String> getDropdowns() {
+    public ArrayList<HashMap<String, String>> getDropdowns() {
         return data.dropdowns;
     }
 
-    public HashMap<String, String[]> getCheckAllThatApplies() {
+    public ArrayList<HashMap<String, String[]>> getCheckAllThatApplies() {
         return data.checkAllThatApplies;
     }
 
-    public HashMap<String, String> getFreeResponses() {
+    public ArrayList<HashMap<String, String>> getFreeResponses() {
         return data.freeResponses;
     }
 
