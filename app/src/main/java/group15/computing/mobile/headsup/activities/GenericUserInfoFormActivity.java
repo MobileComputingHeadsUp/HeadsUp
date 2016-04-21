@@ -110,9 +110,17 @@ public class GenericUserInfoFormActivity extends AppCompatActivity {
         Log.d(TAG, genericInfoJson);
 
         // Save to server
-        APIClient.addGenericUserInfo(genericInfoJson, new JsonHttpResponseHandler() {
+        APIClient.addGenericUserInfo(genericInfoJson, new JsonHttpResponseHandler(){
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+            public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Log.d(TAG, "Failed to retrieve data.");
+                makeToast("Ooops an Error Occurred.");
+            }
+
+            @Override
+            public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
                 // Get the data from the response
                 Log.d(TAG, response.toString());
                 makeToast("User Info Saved");
@@ -122,18 +130,7 @@ public class GenericUserInfoFormActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-//                super.onFailure(statusCode, headers, responseString, throwable);
-                Log.d(TAG, "Failed to retrieve data.");
-                makeToast("Ooops an Error Occurred.");
-
-                // TODO: HANDLE THE ERROR BETTER LOL
-            }
-
         });
-
     }
 
     public void setBirthday(Date birthday) {

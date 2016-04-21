@@ -33,7 +33,9 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activities.SpaceDashboard"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
 
@@ -43,9 +45,6 @@
         <activity
             android:name=".activities.GenericUserInfoFormActivity"
             android:theme="@style/AppTheme.WithActionBar">
-            android:theme="@style/AppTheme.NoActionBar"
-            android:configChanges="orientation|screenSize"
-            android:launchMode="singleTask">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
