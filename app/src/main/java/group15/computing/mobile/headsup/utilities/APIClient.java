@@ -48,6 +48,21 @@ public class APIClient {
         client.post(API_BASE_URL + "api/beacons/hit_beacon", params, responseHandler);
     }
 
+    public static void leaveSpace(JsonHttpResponseHandler responseHandler){
+        // Get the current user and space_id.
+        Authentication auth = Authentication.getInstance();
+        String currentUserID = auth.getCurrentUser().getId();
+        String spaceID = auth.getCurrentSpaceID();
+
+        // Add the data to the request.
+        RequestParams params = new RequestParams();
+        params.put("google_id", currentUserID);
+        params.put("space_id", spaceID);
+
+        // Make the request.
+        client.post(API_BASE_URL + "api/space/leave", params, responseHandler);
+    }
+
     public static void addSpaceProfile(String spaceProfile, JsonHttpResponseHandler responseHandler){
 
         // Get the current user.

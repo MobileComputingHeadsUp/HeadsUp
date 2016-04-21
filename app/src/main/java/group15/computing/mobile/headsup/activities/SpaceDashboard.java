@@ -38,6 +38,7 @@ import group15.computing.mobile.headsup.beacon_detection.BeaconEvent;
 import group15.computing.mobile.headsup.beacon_detection.RequestedAction;
 import group15.computing.mobile.headsup.utilities.APIClient;
 import group15.computing.mobile.headsup.utilities.Constants;
+import group15.computing.mobile.headsup.utilities.LeaveSpaceDialogFragment;
 import group15.computing.mobile.headsup.utilities.Utilities;
 
 public class SpaceDashboard extends AppCompatActivity {
@@ -54,6 +55,9 @@ public class SpaceDashboard extends AppCompatActivity {
     private IntentFilter beaconIntentFilter;
     private BroadcastReceiver beaconBroadcastReceiver;
     private boolean beaconsFound;
+
+    private IntentFilter exitRegionFilter;
+    private BroadcastReceiver exitRegionReceiver;
 
     HomeRecyclerViewFragment home;
     AnnouncementsRecyclerViewFragment announcements;
@@ -141,18 +145,7 @@ public class SpaceDashboard extends AppCompatActivity {
             @Override
             public HeaderDesign getHeaderDesign(int page) {
                 switch (page) {
-//                    case 0:
-//                        return HeaderDesign.fromColorResAndUrl(
-//                                R.color.blue,
-//                                "http://www.wallpaperhi.com/thumbnails/detail/20140629/clouds%20nature%20planets%20earth%20low%20resolution_www.wallpaperhi.com_38.jpg");
-//                    case 1:
-//                        return HeaderDesign.fromColorResAndUrl(
-//                                R.color.green,
-//                                "http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2014/06/wallpaper_51.jpg");
-//                    case 2:
-//                        return HeaderDesign.fromColorResAndUrl(
-//                                R.color.cyan,
-//                                "http://www.droid-life.com/wp-content/uploads/2014/10/lollipop-wallpapers10.jpg");
+                    // TODO: Make different colors/ pictures for each page?
                     default:
                         return HeaderDesign.fromColorResAndUrl(
                                 R.color.primary,
@@ -166,7 +159,6 @@ public class SpaceDashboard extends AppCompatActivity {
 
         // Sync the state!
         mDrawerToggle.syncState();
-        setupBeaconEventListener();
     }
 
     @Override
@@ -174,6 +166,7 @@ public class SpaceDashboard extends AppCompatActivity {
         super.onResume();
 
         // Get the feed Data.
+        setupBeaconEventListener();
         initFeedRefresh();
     }
 
@@ -241,9 +234,6 @@ public class SpaceDashboard extends AppCompatActivity {
         } catch(RemoteException e){
             e.printStackTrace();
         }
-
-        // Register the receiver.
-        registerReceiver(beaconBroadcastReceiver, beaconIntentFilter);
     }
 
     private void stopRanging(){
@@ -255,17 +245,25 @@ public class SpaceDashboard extends AppCompatActivity {
         } catch(RemoteException e){
             e.printStackTrace();
         }
+    }
 
+    private void unregisterReceivers(){
         // Unregister the receiver
         try{
             unregisterReceiver(beaconBroadcastReceiver);
         }catch(IllegalArgumentException e){
             e.printStackTrace();
         }
+        try{
+            unregisterReceiver(exitRegionReceiver);
+        }catch(IllegalArgumentException e){
+            e.printStackTrace();
+        }
     }
 
+
     private void setupBeaconEventListener(){
-        // Register the beacons broadcast listener
+        // Register the beacons broadcast listener for finding beacons
         beaconIntentFilter = new IntentFilter(Constants.BEACONS_FOUND);
         beaconBroadcastReceiver = new BroadcastReceiver() {
             @Override
@@ -280,10 +278,26 @@ public class SpaceDashboard extends AppCompatActivity {
                 requestFeedData(beaconArrayJson);
             }
         };
+        registerReceiver(beaconBroadcastReceiver, beaconIntentFilter);
+
+
+        // Register the beacon broadcast listener for exiting a region
+        exitRegionFilter = new IntentFilter(Constants.EXIT_REGION);
+        exitRegionReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                 Log.d(TAG, "Exited region.");
+
+                LeaveSpaceDialogFragment dialog = new LeaveSpaceDialogFragment(SpaceDashboard.this);
+                dialog.show(getFragmentManager(), TAG);
+                // TODO: Launch dialog to confirm leaving a space.
+            }
+        };
+        registerReceiver(exitRegionReceiver, exitRegionFilter);
     }
 
     private void requestFeedData(String beaconArray){
-//
+
         final String feedData = Utilities.loadJSONFromAsset("dummy_space_feed.json", SpaceDashboard.this);
         refreshFeed(feedData);
 //        APIClient.requestSpaceDashFeed(beaconArray, new JsonHttpResponseHandler(){
@@ -300,6 +314,12 @@ public class SpaceDashboard extends AppCompatActivity {
     }
 
     // Stop the user from going back after entering a space.
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopRanging();
+        unregisterReceivers();
+    }
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);

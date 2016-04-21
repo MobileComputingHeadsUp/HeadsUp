@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -55,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
 
         if(Authentication.getInstance().isSignedIn()){
             startRanging();
+        }else{
+            TextView description = (TextView) findViewById(R.id.main_description);
+            description.setText("You must be signed in to join a space.");
         }
     }
 
